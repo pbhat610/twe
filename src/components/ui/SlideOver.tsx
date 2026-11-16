@@ -25,14 +25,22 @@ export function SlideOver({
   width?: string;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  // Parents pass inline handlers that change on every render (e.g. each poll of
+  // the interview list). Read the latest one via a ref so the effect below runs
+  // only when the panel opens — otherwise it re-focuses the panel and steals
+  // focus from whatever input the user is typing in.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onCloseRef.current();
     window.addEventListener("keydown", onKey);
     panelRef.current?.focus();
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
   return (
