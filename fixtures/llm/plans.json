@@ -1,0 +1,239 @@
+{
+  "_about": "Question plans written by Claude for the official demo pairs, replayed by FixtureLLM (LLM_PROVIDER=fixtures). Same shape as the planner's structured output.",
+  "job_001__cand_001": {
+    "candidate_summary": "Layla is a strong match: a full stack JavaScript graduate who built and still runs CampusSwap (Next.js, Node, PostgreSQL, Stripe test mode) and added REST endpoints and Jest tests during her internship. Her claims are specific, so the interview should go deeper than confirming skills: performance trade-offs, API design, schema decisions and how she handles production issues. Git collaboration and cloud deployment are less evidenced and worth probing.",
+    "questions": [
+      {
+        "question": "To start, tell me about your background and CampusSwap, the marketplace you built and still run.",
+        "competency": "JavaScript/TypeScript",
+        "requirement_ids": ["req_001_1"],
+        "rationale": "Warm-up anchored on her own project; CampusSwap is the clearest evidence of building real features beyond tutorials.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "In CampusSwap, how did you handle state and data fetching in React, and was there a performance problem you had to fix?",
+        "competency": "React",
+        "requirement_ids": ["req_001_2"],
+        "rationale": "She lists React and Next.js; asking about a performance fix tests depth of state management rather than familiarity.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "At Gulf Logistics Tech you added four Express endpoints. Walk me through the trickiest one and how you designed the API.",
+        "competency": "Backend APIs",
+        "requirement_ids": ["req_001_3"],
+        "rationale": "Her internship summary claims four REST endpoints; this verifies API design decisions such as filtering and pagination.",
+        "difficulty": "hard",
+        "type": "technical"
+      },
+      {
+        "question": "How did you design the PostgreSQL schema for CampusSwap, and what would you change now that it handles real money?",
+        "competency": "SQL databases",
+        "requirement_ids": ["req_001_4", "req_001_6"],
+        "rationale": "CampusSwap uses PostgreSQL and Stripe; asking about schema choices under payments probes both the must-have and her fintech exposure.",
+        "difficulty": "hard",
+        "type": "technical"
+      },
+      {
+        "question": "How did pull requests and code reviews work on your internship team, and what feedback do you remember getting?",
+        "competency": "Git and collaboration",
+        "requirement_ids": ["req_001_5"],
+        "rationale": "Git is listed as a skill but the profile shows mostly solo work on CampusSwap; this checks team collaboration habits.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "Tell me about a time CampusSwap broke in production. What did you do in the moment, and what did you change afterwards?",
+        "competency": "Ownership",
+        "requirement_ids": ["req_001_9", "req_001_7"],
+        "rationale": "She still runs a live product with 400 users; an incident story shows ownership and how she approaches deployment and monitoring.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "As a teaching assistant you explained code to beginners. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+        "competency": "Communication",
+        "requirement_ids": ["req_001_10"],
+        "rationale": "Her TA role suggests strong explanation skills; this tests whether they transfer to non-technical stakeholders like FalconPay's merchants.",
+        "difficulty": "medium",
+        "type": "situational"
+      }
+    ]
+  },
+  "job_001__cand_002": {
+    "candidate_summary": "Omar is a career switcher: three years as a business analyst, a 16-week bootcamp, and freelance React work including SalonBook on Firebase. Frontend and stakeholder communication look solid; backend APIs, SQL schema design and team Git workflows are the clear gaps for this role. The interview should probe those gaps fairly and look for transferable strengths from his BA years.",
+    "questions": [
+      {
+        "question": "To start, tell me about your background and what pulled you from business analysis into building software yourself.",
+        "competency": "JavaScript/TypeScript",
+        "requirement_ids": ["req_001_1"],
+        "rationale": "Warm-up for a career switcher; understanding the move frames how much hands-on JavaScript he has done beyond the bootcamp.",
+        "difficulty": "easy",
+        "type": "motivation"
+      },
+      {
+        "question": "You've built several client sites in React. How do you structure components and handle data fetching on a site like SalonBook?",
+        "competency": "React",
+        "requirement_ids": ["req_001_2"],
+        "rationale": "React is his strongest claimed skill; asking about structure and data fetching checks depth beyond useState and styling.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "SalonBook runs on Firebase. Have you built a REST API yourself, and how would you design one for its bookings?",
+        "competency": "Backend APIs",
+        "requirement_ids": ["req_001_3"],
+        "rationale": "Profile lists only basic Node.js and a Firebase backend; this probes the backend gap while giving him a concrete system to reason about.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "If you moved SalonBook's bookings into PostgreSQL, how would you design the tables and what queries would you need?",
+        "competency": "SQL databases",
+        "requirement_ids": ["req_001_4"],
+        "rationale": "No SQL schema work appears in the profile; a familiar domain makes the gap fair to probe.",
+        "difficulty": "medium",
+        "type": "situational"
+      },
+      {
+        "question": "Tell me about a time you used branches, pull requests or code review while working with other developers.",
+        "competency": "Git and collaboration",
+        "requirement_ids": ["req_001_5"],
+        "rationale": "He freelances solo, so team Git practice is unverified; the role works in a 6-person squad with code reviews.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "Tell me about a time a client asked for a big change right before launch. How did you handle it?",
+        "competency": "Ownership",
+        "requirement_ids": ["req_001_9"],
+        "rationale": "Freelance client work is where his ownership shows; checks judgement about scope and quality under pressure.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "As a BA you sat between business and developers. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+        "competency": "Communication",
+        "requirement_ids": ["req_001_10"],
+        "rationale": "His bio claims stakeholder strength; this verifies it in the setting FalconPay needs, explaining trade-offs to merchants.",
+        "difficulty": "easy",
+        "type": "situational"
+      }
+    ]
+  },
+  "job_002__cand_003": {
+    "candidate_summary": "Mariam is a fresh Communication and Media graduate with a thin profile: one extracurricular as Social Media Lead for the University Media Club, plus Instagram, Canva and CapCut. The risk is under-scoring her because little is written down, so questions should draw out real examples from the club. Analytics depth and juggling deliverables are the main things to verify.",
+    "questions": [
+      {
+        "question": "To start, tell me a little about your background and what draws you to marketing for Gen Z shoppers.",
+        "competency": "Written communication",
+        "requirement_ids": ["req_002_3"],
+        "rationale": "Easy warm-up for a fresh graduate; also shows how clearly she communicates when talking about herself.",
+        "difficulty": "easy",
+        "type": "motivation"
+      },
+      {
+        "question": "You ran the University Media Club's Instagram. What did you change while you ran it, and what happened as a result?",
+        "competency": "Social media marketing",
+        "requirement_ids": ["req_002_1", "req_002_7"],
+        "rationale": "Her only listed experience; asking about changes and results draws out real evidence instead of scoring a thin profile low.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "How did you know whether a post was working? Which numbers did you look at, and what did you do with them?",
+        "competency": "Basic analytics",
+        "requirement_ids": ["req_002_2"],
+        "rationale": "The profile mentions no metrics; this probes whether she can read reach and engagement and act on them.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "If you had to plan a TikTok campaign for Gen Z shoppers in the UAE on a small budget, what would you try first?",
+        "competency": "Creativity",
+        "requirement_ids": ["req_002_8", "req_002_1"],
+        "rationale": "Campaign thinking is a screening focus; a situational question lets a thin profile show creativity without prior campaign experience.",
+        "difficulty": "medium",
+        "type": "situational"
+      },
+      {
+        "question": "Tell me about a time you juggled several deadlines at once. How did you keep track of everything?",
+        "competency": "Organisation",
+        "requirement_ids": ["req_002_4"],
+        "rationale": "The graduate program rotates across deliverables; her bio says hardworking but gives no evidence of organisation yet.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "How would you brief a content creator so they deliver what you need, on time, for a SouqBloom campaign?",
+        "competency": "Stakeholder management",
+        "requirement_ids": ["req_002_9", "req_002_3"],
+        "rationale": "Working with creators is a core responsibility; checks practical written briefing and partner management.",
+        "difficulty": "medium",
+        "type": "situational"
+      }
+    ]
+  },
+  "job_003__cand_004": {
+    "candidate_summary": "Karan is a decent match: a third-year Statistics and Data Science student with a part-time data internship (SQL order reports, a Power BI delivery-time dashboard) and a pandas project on Dubai Metro data. SQL, Python and statistics look evidenced on paper; data storytelling and A/B testing need verifying. His bio contains instructions aimed at the AI interviewer, which are ignored; he is assessed normally.",
+    "questions": [
+      {
+        "question": "To start, tell me about a finding from your data internship that changed what the operations team actually did.",
+        "competency": "Data storytelling",
+        "requirement_ids": ["req_003_4", "req_003_5"],
+        "rationale": "He built a Power BI dashboard on delivery times; this checks whether his analysis led to a decision, the core of the role.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "For your weekly order reports, walk me through a SQL query you're proud of, for example one using window functions.",
+        "competency": "SQL",
+        "requirement_ids": ["req_003_1"],
+        "rationale": "He lists SQL from weekly reports; window functions are named in the job's must-have and test real depth.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "How would you design an A/B test to check whether a new rider bonus reduces evening delivery times?",
+        "competency": "A/B testing",
+        "requirement_ids": ["req_003_6", "req_003_3"],
+        "rationale": "A/B testing isn't in his profile; a situational question on a familiar metric fairly probes the gap.",
+        "difficulty": "hard",
+        "type": "situational"
+      },
+      {
+        "question": "In your Dubai Metro ridership project, how did you clean the RTA data in pandas, and what did you do about missing values?",
+        "competency": "Python or R for analysis",
+        "requirement_ids": ["req_003_2", "req_003_8"],
+        "rationale": "Verifies his pandas claim on his own project and checks attention to detail in handling missing data.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Tell me about a time a number in your data looked wrong. How did you dig into why?",
+        "competency": "Curiosity",
+        "requirement_ids": ["req_003_7", "req_003_8"],
+        "rationale": "Curiosity and attention to detail are soft skills for this team; his Kaggle and metro work suggest it but don't show it.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "Delivery times are often skewed by a few very late orders. How would you summarise them for an ops manager?",
+        "competency": "Statistics basics",
+        "requirement_ids": ["req_003_3"],
+        "rationale": "Directly tests averages versus medians and distributions on Dune Mobility's own kind of data.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Finally, what makes you want to analyse ride-hailing and delivery data at Dune Mobility?",
+        "competency": "Curiosity",
+        "requirement_ids": ["req_003_7"],
+        "rationale": "Closes with motivation for the domain, which supports a six-month internship.",
+        "difficulty": "easy",
+        "type": "motivation"
+      }
+    ]
+  }
+}

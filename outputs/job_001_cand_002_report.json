@@ -1,0 +1,276 @@
+{
+  "interview_id": "int_212e54a4fce0492e",
+  "job_id": "job_001",
+  "candidate_id": "cand_002",
+  "completed_at": "2026-11-15T17:57:48.852Z",
+  "competencies": [
+    {
+      "competency": "JavaScript/TypeScript",
+      "requirement_ids": [
+        "req_001_1"
+      ],
+      "score": 3,
+      "evidence": [
+        "Now I freelance building websites for small businesses"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "React",
+      "requirement_ids": [
+        "req_001_2"
+      ],
+      "score": 3,
+      "evidence": [
+        "I usually use useState and useEffect, and Tailwind for styling"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Backend APIs",
+      "requirement_ids": [
+        "req_001_3"
+      ],
+      "score": 2,
+      "evidence": [
+        "In the bootcamp we built a small Express API for a todo app"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "SQL databases",
+      "requirement_ids": [
+        "req_001_4"
+      ],
+      "score": 2,
+      "evidence": [
+        "I haven't designed a real database schema yet"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Git and collaboration",
+      "requirement_ids": [
+        "req_001_5"
+      ],
+      "score": 2,
+      "evidence": [
+        "mostly I work alone so I push to main"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Ownership",
+      "requirement_ids": [
+        "req_001_9"
+      ],
+      "score": 4,
+      "evidence": [
+        "launched with booking only, and added payments two weeks later"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Communication",
+      "requirement_ids": [
+        "req_001_10"
+      ],
+      "score": 4,
+      "evidence": [
+        "launched with booking only, and added payments two weeks later",
+        "translating requirements both ways"
+      ],
+      "notes": "Evidence from 2 answer(s) (offline heuristic)."
+    }
+  ],
+  "overall": {
+    "strengths": [
+      "Engaged with the questions."
+    ],
+    "concerns": [
+      "Answers were mostly general, with few concrete examples."
+    ],
+    "recommendation": "hold",
+    "confidence": "medium",
+    "summary": "Offline heuristic report: average answer score 2.6/5 across 8 scored answers. Switch LLM_PROVIDER to openai for a written assessment.",
+    "suggested_next_round_focus": []
+  },
+  "flags": [],
+  "turns": [
+    {
+      "turn": 1,
+      "question_id": "q1",
+      "agent_message": "To start, tell me about your background and what pulled you from business analysis into building software yourself.",
+      "candidate_answer": "I'm Omar. I was a business analyst for about three years and then did a coding bootcamp. Now I freelance building websites for small businesses.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_1"
+        ],
+        "key_quote": "Now I freelance building websites for small businesses",
+        "score": 3,
+        "note": "Clear career story; hands-on JavaScript depth still to be shown."
+      },
+      "decision": "move_on",
+      "decision_reason": "Warm-up answered; the technical questions will test depth."
+    },
+    {
+      "turn": 2,
+      "question_id": "q2",
+      "agent_message": "Thanks, that's a helpful start. You've built several client sites in React. How do you structure components and handle data fetching on a site like SalonBook?",
+      "candidate_answer": "I've built six or seven sites in React. I usually use useState and useEffect, and Tailwind for styling. For the booking site I used a calendar library.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_2"
+        ],
+        "key_quote": "I usually use useState and useEffect, and Tailwind for styling",
+        "score": 3,
+        "note": "Real React usage, but no detail on structure or data fetching."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Answer lists tools; ask for one concrete problem to see depth."
+    },
+    {
+      "turn": 3,
+      "question_id": "q2",
+      "agent_message": "Thanks. Tell me about one tricky part of the booking site's React code. What was hard, and how did you solve it?",
+      "candidate_answer": "Yeah, it was fine, it worked.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": 2,
+        "note": "No detail on the problem or the solution."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Still vague; one more specific prompt."
+    },
+    {
+      "turn": 4,
+      "question_id": "q2",
+      "agent_message": "Okay. Let's make it concrete: what was one specific problem you hit, and what exactly did you change to fix it?",
+      "candidate_answer": "Sorry, I'm not sure about that one.",
+      "analysis": {
+        "relevance": "no_answer",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": null,
+        "note": "Didn't answer."
+      },
+      "decision": "move_on",
+      "decision_reason": "No answer to assess; moving on."
+    },
+    {
+      "turn": 5,
+      "question_id": "q3",
+      "agent_message": "No problem, let's move on. SalonBook runs on Firebase. Have you built a REST API yourself, and how would you design one for its bookings?",
+      "candidate_answer": "Mostly I've used Firebase so I didn't really have to build APIs. In the bootcamp we built a small Express API for a todo app.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_3"
+        ],
+        "key_quote": "In the bootcamp we built a small Express API for a todo app",
+        "score": 2,
+        "note": "Backend experience is limited to a bootcamp exercise."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Probe the gap fairly: see how he would reason about a real API."
+    },
+    {
+      "turn": 6,
+      "question_id": "q3",
+      "agent_message": "Thanks for being clear. In that todo API, how did you structure the routes and handle errors or invalid input?",
+      "candidate_answer": "Sorry, I'm not sure about that one.",
+      "analysis": {
+        "relevance": "no_answer",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": null,
+        "note": "Didn't answer."
+      },
+      "decision": "move_on",
+      "decision_reason": "No answer to assess; moving on."
+    },
+    {
+      "turn": 7,
+      "question_id": "q4",
+      "agent_message": "No problem, let's move on. If you moved SalonBook's bookings into PostgreSQL, how would you design the tables and what queries would you need?",
+      "candidate_answer": "We covered SQL in the bootcamp, SELECT, JOIN, that kind of thing. In my BA job I mostly used Excel. I haven't designed a real database schema yet.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_4"
+        ],
+        "key_quote": "I haven't designed a real database schema yet",
+        "score": 2,
+        "note": "Basic SQL from a course; no schema design yet."
+      },
+      "decision": "move_on",
+      "decision_reason": "He is clear this is a gap; further probing won't add evidence."
+    },
+    {
+      "turn": 8,
+      "question_id": "q5",
+      "agent_message": "Thanks for being honest. Tell me about a time you used branches, pull requests or code review while working with other developers.",
+      "candidate_answer": "I use GitHub but mostly I work alone so I push to main. In the bootcamp we did pull requests in groups.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_5"
+        ],
+        "key_quote": "mostly I work alone so I push to main",
+        "score": 2,
+        "note": "Limited team Git practice outside the bootcamp."
+      },
+      "decision": "move_on",
+      "decision_reason": "Gap is clear and honest; nothing more to draw out."
+    },
+    {
+      "turn": 9,
+      "question_id": "q6",
+      "agent_message": "Thanks. Tell me about a time a client asked for a big change right before launch. How did you handle it?",
+      "candidate_answer": "For SalonBook the client wanted online payments two days before launch. I told them honestly I couldn't do it safely in two days, launched with booking only, and added payments two weeks later.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_9",
+          "req_001_10"
+        ],
+        "key_quote": "launched with booking only, and added payments two weeks later",
+        "score": 4,
+        "note": "Good judgement on scope and safety; communicated honestly with the client."
+      },
+      "decision": "move_on",
+      "decision_reason": "Concrete situation, decision and outcome."
+    },
+    {
+      "turn": 10,
+      "question_id": "q7",
+      "agent_message": "Thanks, that's a good example. As a BA you sat between business and developers. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+      "candidate_answer": "This is my strength. As a BA I sat between the business and the developers every day, translating requirements both ways.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_10"
+        ],
+        "key_quote": "translating requirements both ways",
+        "score": 3,
+        "note": "Credible from his BA role, but no specific example of explaining a trade-off."
+      },
+      "decision": "move_on",
+      "decision_reason": "Relevant background is clear; the ownership answer already showed client communication."
+    }
+  ]
+}

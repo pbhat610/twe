@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterviewReport",
+  "type": "object",
+  "required": ["interview_id", "job_id", "candidate_id", "competencies", "overall", "turns"],
+  "properties": {
+    "interview_id": { "type": "string" },
+    "job_id": { "type": "string" },
+    "candidate_id": { "type": "string" },
+    "completed_at": { "type": "string", "format": "date-time" },
+    "competencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["competency", "requirement_ids", "score", "evidence", "notes"],
+        "properties": {
+          "competency": { "type": "string" },
+          "requirement_ids": { "type": "array", "items": { "type": "string" } },
+          "score": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 5,
+            "description": "null if there is not enough evidence"
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Direct quotes from the candidate's answers"
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "overall": {
+      "type": "object",
+      "required": ["strengths", "concerns", "recommendation", "confidence", "summary"],
+      "properties": {
+        "strengths": { "type": "array", "items": { "type": "string" } },
+        "concerns": { "type": "array", "items": { "type": "string" } },
+        "recommendation": { "type": "string", "enum": ["advance", "hold", "reject"] },
+        "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+        "summary": { "type": "string", "description": "3-4 sentence summary for the recruiter" },
+        "suggested_next_round_focus": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "description": "Anything the recruiter should know, e.g. prompt injection attempt detected, candidate went off-topic",
+      "items": {
+        "type": "object",
+        "required": ["type", "detail"],
+        "properties": {
+          "type": { "type": "string", "enum": ["injection_attempt", "off_topic", "empty_answer", "inappropriate", "other"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "turns": {
+      "type": "array",
+      "description": "Full transcript with the agent's decision log",
+      "items": {
+        "type": "object",
+        "required": ["turn", "agent_message", "candidate_answer", "analysis", "decision"],
+        "properties": {
+          "turn": { "type": "integer" },
+          "question_id": { "type": ["string", "null"] },
+          "agent_message": { "type": "string" },
+          "candidate_answer": { "type": "string" },
+          "analysis": {
+            "type": "object",
+            "description": "The agent's analysis of this answer, made right after the candidate replied",
+            "required": ["relevance", "depth", "requirement_ids", "key_quote", "score", "note"],
+            "properties": {
+              "relevance": { "type": "string", "enum": ["on_topic", "partial", "off_topic", "no_answer"] },
+              "depth": { "type": "string", "enum": ["specific_example", "general", "vague"] },
+              "requirement_ids": { "type": "array", "items": { "type": "string" } },
+              "key_quote": { "type": ["string", "null"] },
+              "score": { "type": ["integer", "null"], "minimum": 1, "maximum": 5 },
+              "note": { "type": "string" }
+            }
+          },
+          "decision": { "type": "string", "enum": ["follow_up", "move_on", "end"] },
+          "decision_reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

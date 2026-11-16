@@ -1,0 +1,186 @@
+{
+  "_about": "Role-based question plans written by Claude for the three official demo roles. Used as the demo assessments' questions and replayed by FixtureLLM when drafting questions for these roles without a candidate. Must-have requirements come first, so trimming to 5 questions still covers them.",
+  "job_001": {
+    "candidate_summary": "",
+    "questions": [
+      {
+        "question": "To start, tell me about your background and a project where you built a real feature with JavaScript or TypeScript.",
+        "competency": "JavaScript/TypeScript",
+        "requirement_ids": ["req_001_1"],
+        "rationale": "Warm-up that checks for real feature work beyond tutorials, the first must-have.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "In a React app you built, how did you handle state and data fetching, and was there a performance problem you had to fix?",
+        "competency": "React",
+        "requirement_ids": ["req_001_2"],
+        "rationale": "Tests depth in state management and data fetching rather than familiarity with React.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Walk me through a REST API endpoint you designed in Node.js or similar. What was the trickiest part?",
+        "competency": "Backend APIs",
+        "requirement_ids": ["req_001_3"],
+        "rationale": "The role maintains merchant-facing REST APIs; this checks real API design decisions.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Tell me about a database schema you designed. Which tables and indexes did you choose, and why?",
+        "competency": "SQL databases",
+        "requirement_ids": ["req_001_4"],
+        "rationale": "Checks schema design and query thinking, ideally PostgreSQL, a must-have for the backend half of the role.",
+        "difficulty": "hard",
+        "type": "technical"
+      },
+      {
+        "question": "How have branches, pull requests and code reviews worked on a team you've been part of?",
+        "competency": "Git and collaboration",
+        "requirement_ids": ["req_001_5"],
+        "rationale": "The squad ships through pull requests and reviews; checks collaborative Git habits.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "Tell me about a time something you built broke in production. What did you do in the moment, and what changed afterwards?",
+        "competency": "Ownership",
+        "requirement_ids": ["req_001_9", "req_001_7"],
+        "rationale": "Engineers debug production issues and own features end to end; shows ownership and operational habits.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "How would you explain a technical trade-off to a merchant who isn't an engineer?",
+        "competency": "Communication",
+        "requirement_ids": ["req_001_10"],
+        "rationale": "FalconPay engineers explain trade-offs to merchants and non-engineers.",
+        "difficulty": "medium",
+        "type": "situational"
+      }
+    ]
+  },
+  "job_002": {
+    "candidate_summary": "",
+    "questions": [
+      {
+        "question": "To start, tell me a little about your background and what draws you to marketing for Gen Z shoppers.",
+        "competency": "Written communication",
+        "requirement_ids": ["req_002_3"],
+        "rationale": "Easy warm-up; also shows how clearly the candidate communicates.",
+        "difficulty": "easy",
+        "type": "motivation"
+      },
+      {
+        "question": "Tell me about a social media account or campaign you ran. What did you change, and what happened as a result?",
+        "competency": "Social media marketing",
+        "requirement_ids": ["req_002_1", "req_002_7"],
+        "rationale": "Looks for hands-on TikTok or Instagram work with results, the core of the role.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "How did you know whether a post was working? Which numbers did you look at, and what did you do with them?",
+        "competency": "Basic analytics",
+        "requirement_ids": ["req_002_2"],
+        "rationale": "Checks whether the candidate reads reach and engagement and acts on them.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "Tell me about a time you juggled several deadlines at once. How did you keep track of everything?",
+        "competency": "Organisation",
+        "requirement_ids": ["req_002_4"],
+        "rationale": "The graduate program rotates across many deliverables and deadlines.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "If you had to plan a TikTok campaign for Gen Z shoppers in the UAE on a small budget, what would you try first?",
+        "competency": "Creativity",
+        "requirement_ids": ["req_002_8", "req_002_1"],
+        "rationale": "Campaign thinking is a screening focus; a situational question works even without prior campaigns.",
+        "difficulty": "medium",
+        "type": "situational"
+      },
+      {
+        "question": "How would you brief a content creator so they deliver what you need, on time, for a SouqBloom campaign?",
+        "competency": "Stakeholder management",
+        "requirement_ids": ["req_002_9", "req_002_3"],
+        "rationale": "Working with creators and agencies is a core responsibility.",
+        "difficulty": "medium",
+        "type": "situational"
+      },
+      {
+        "question": "Which tools do you use to make short videos or graphics, and what's something you made that you're proud of?",
+        "competency": "Canva / CapCut / basic video editing",
+        "requirement_ids": ["req_002_6"],
+        "rationale": "Nice-to-have that speeds up content production in the role.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      }
+    ]
+  },
+  "job_003": {
+    "candidate_summary": "",
+    "questions": [
+      {
+        "question": "To start, tell me about a finding from your own data work that changed what someone actually did.",
+        "competency": "Data storytelling",
+        "requirement_ids": ["req_003_4", "req_003_5"],
+        "rationale": "The team's analyses must lead to decisions by ops managers.",
+        "difficulty": "easy",
+        "type": "behavioral"
+      },
+      {
+        "question": "Walk me through a SQL query you're proud of, for example one using joins or window functions.",
+        "competency": "SQL",
+        "requirement_ids": ["req_003_1"],
+        "rationale": "Joins, aggregations and window functions are named in the must-have.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "How would you design an A/B test to check whether a new rider bonus reduces evening delivery times?",
+        "competency": "A/B testing",
+        "requirement_ids": ["req_003_6", "req_003_3"],
+        "rationale": "The intern helps design and read A/B tests on Dune Mobility's own metrics.",
+        "difficulty": "hard",
+        "type": "situational"
+      },
+      {
+        "question": "Tell me about a dataset you cleaned in Python or R. What did you do about missing or messy values?",
+        "competency": "Python or R for analysis",
+        "requirement_ids": ["req_003_2", "req_003_8"],
+        "rationale": "Checks pandas-style cleaning and attention to detail with real data.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Tell me about a time a number in your data looked wrong. How did you dig into why?",
+        "competency": "Curiosity",
+        "requirement_ids": ["req_003_7", "req_003_8"],
+        "rationale": "Curiosity about why numbers look the way they do is a stated soft skill.",
+        "difficulty": "medium",
+        "type": "behavioral"
+      },
+      {
+        "question": "Delivery times are often skewed by a few very late orders. How would you summarise them for an ops manager?",
+        "competency": "Statistics basics",
+        "requirement_ids": ["req_003_3"],
+        "rationale": "Directly tests averages versus medians and distributions on the team's own kind of data.",
+        "difficulty": "medium",
+        "type": "technical"
+      },
+      {
+        "question": "Finally, what makes you want to analyse ride-hailing and delivery data at Dune Mobility?",
+        "competency": "Curiosity",
+        "requirement_ids": ["req_003_7"],
+        "rationale": "Closes with motivation for the domain and the six-month internship.",
+        "difficulty": "easy",
+        "type": "motivation"
+      }
+    ]
+  }
+}

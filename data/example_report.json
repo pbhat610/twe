@@ -1,0 +1,81 @@
+{
+  "_note": "Shortened example (job_002 + cand_003) to show the expected shape. Your reports should cover every planned competency and the full transcript.",
+  "interview_id": "int_example_01",
+  "job_id": "job_002",
+  "candidate_id": "cand_003",
+  "completed_at": "2026-11-13T10:42:00Z",
+  "competencies": [
+    {
+      "competency": "Social media marketing",
+      "requirement_ids": ["req_002_1"],
+      "score": 4,
+      "evidence": [
+        "we had around 600 followers",
+        "By the end of the year we were at about 2,100 and the Reels got way more reach than our posts"
+      ],
+      "notes": "Initial answer was thin, but after a follow-up she showed real growth results and a content strategy (Reels, recurring series)."
+    },
+    {
+      "competency": "Basic analytics",
+      "requirement_ids": ["req_002_2"],
+      "score": 2,
+      "evidence": [
+        "I looked at likes and views mostly",
+        "Reels posted around 8 or 9pm got more views than morning ones, so we moved our schedule"
+      ],
+      "notes": "Acts on simple insights, but no exposure to CTR, conversion or formal reporting yet. Trainable for a graduate role."
+    },
+    {
+      "competency": "Arabic copywriting",
+      "requirement_ids": ["req_002_5"],
+      "score": null,
+      "evidence": [],
+      "notes": "Not covered in the interview. Native Arabic speaker per profile; verify in next round."
+    }
+  ],
+  "overall": {
+    "strengths": ["Grew a real audience with a clear content approach", "Gen Z-relevant campaign instinct (budget thrift challenge)"],
+    "concerns": ["Limited analytics vocabulary", "Thin profile; needed prompting to share examples"],
+    "recommendation": "advance",
+    "confidence": "medium",
+    "summary": "Mariam's profile undersells her. With follow-ups she showed hands-on social growth and a sensible Gen Z campaign idea. Analytics is the main gap, which the graduate program can cover.",
+    "suggested_next_round_focus": ["Analytics exercise with a sample campaign report", "Arabic caption writing task"]
+  },
+  "flags": [
+    { "type": "off_topic", "detail": "Asked about salary and remote work mid-interview; agent noted it for the recruiter and redirected." }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "question_id": "q1",
+      "agent_message": "Your profile mentions you managed the media club's Instagram. What did you change while you ran it, and what happened as a result?",
+      "candidate_answer": "I managed the media club's Instagram.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": ["req_002_1"],
+        "key_quote": "I managed the media club's Instagram",
+        "score": 2,
+        "note": "Restates the profile with no actions or results."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Answer restates the profile with no detail; probe for actions and results."
+    },
+    {
+      "turn": 2,
+      "question_id": "q1",
+      "agent_message": "Got it. Can you walk me through one specific thing you tried and how you knew it worked?",
+      "candidate_answer": "When I took over we had around 600 followers. I started doing Reels of behind the scenes at our events and a weekly 'student of the week' series. By the end of the year we were at about 2,100 and the Reels got way more reach than our posts.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": ["req_002_1", "req_002_8"],
+        "key_quote": "By the end of the year we were at about 2,100 and the Reels got way more reach than our posts",
+        "score": 4,
+        "note": "Clear actions (Reels, weekly series) with measurable growth."
+      },
+      "decision": "move_on",
+      "decision_reason": "Concrete actions and results given; competency evidenced."
+    }
+  ]
+}

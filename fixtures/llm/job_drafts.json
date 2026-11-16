@@ -1,0 +1,50 @@
+{
+  "_about": "Job descriptions written by Claude for the example briefs offered in the 'New role' screen, replayed by FixtureLLM. Any other brief falls back to the offline heuristic (or OpenAI when LLM_PROVIDER=openai).",
+  "examples": [
+    {
+      "label": "Customer Success Associate (rough notes)",
+      "brief": "Customer Success Associate at +twe, Dubai, hybrid, full-time. You'd onboard university career centres and employers onto the platform, run training calls, answer support tickets and turn feedback into product requests for the product team. Need 1-2 years in a customer-facing role, great written English, comfortable with HubSpot or Intercom. Arabic is a plus. Salary around AED 9,000-11,000 a month. Ideally under 28 and a UAE national.",
+      "output": {
+        "title": "Customer Success Associate",
+        "company": {
+          "name": "+twe",
+          "industry": "Careers platform (Gen Z hiring)",
+          "size": null,
+          "about": "+twe is a Gen Z career platform in the UAE connecting students and graduates with employers."
+        },
+        "location": "Dubai, UAE",
+        "work_mode": "Hybrid",
+        "employment_type": "Full-time",
+        "experience_level": "1-2 years",
+        "salary_min_aed_monthly": 9000,
+        "salary_max_aed_monthly": 11000,
+        "description": "You'll help university career centres and employers get real value from +twe: onboarding them, running training calls and solving their questions. You'll also be the voice of our customers inside the company, turning their feedback into clear product requests.",
+        "responsibilities": [
+          "Onboard new university career centres and employer accounts",
+          "Run training calls and product walkthroughs",
+          "Answer and resolve support tickets within agreed response times",
+          "Turn customer feedback into clear, prioritised product requests",
+          "Track account health and flag accounts at risk"
+        ],
+        "must_have": [
+          { "skill": "Customer-facing experience", "detail": "1-2 years in support, success, account or similar roles" },
+          { "skill": "Written communication", "detail": "Clear, friendly English in emails, tickets and guides" },
+          { "skill": "Support tooling", "detail": "Comfortable in HubSpot, Intercom or a similar CRM / helpdesk" },
+          { "skill": "Problem solving", "detail": "Gets to the root of a customer issue and follows it through" }
+        ],
+        "nice_to_have": [
+          { "skill": "Arabic", "detail": "Supporting Arabic-speaking customers" },
+          { "skill": "EdTech or HR tech exposure", "detail": null }
+        ],
+        "soft_skills": [
+          { "skill": "Empathy", "detail": "Understands what the customer is really trying to do" },
+          { "skill": "Ownership", "detail": "Takes an account or issue from start to finish" }
+        ],
+        "screening_focus": ["customer communication", "problem solving", "turning feedback into action"],
+        "interview_language": "English",
+        "removed_criteria": ["Age limit (\"under 28\")", "Nationality requirement (\"UAE national\")"],
+        "assumptions": ["Company description written from the +twe name; edit if this role is for a client company."]
+      }
+    }
+  ]
+}

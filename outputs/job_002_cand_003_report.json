@@ -1,0 +1,281 @@
+{
+  "interview_id": "int_109bf4249fb841d9",
+  "job_id": "job_002",
+  "candidate_id": "cand_003",
+  "completed_at": "2026-11-15T17:57:53.514Z",
+  "competencies": [
+    {
+      "competency": "Written communication",
+      "requirement_ids": [
+        "req_002_3"
+      ],
+      "score": 2,
+      "evidence": [
+        "I just graduated from Zayed University in Communication and Media"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Social media marketing",
+      "requirement_ids": [
+        "req_002_1",
+        "req_002_7"
+      ],
+      "score": 4,
+      "evidence": [
+        "I managed the media club's Instagram",
+        "By the end of the year we were at about 2,100 and the Reels got way more reach than our posts",
+        "a 'thrift your look' challenge with a budget, because students care about price and showing their style"
+      ],
+      "notes": "Evidence from 4 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Basic analytics",
+      "requirement_ids": [
+        "req_002_2"
+      ],
+      "score": 3,
+      "evidence": [
+        "I looked at likes and views mostly",
+        "Reels posted around 8 or 9pm got more views than morning ones, so we moved our schedule"
+      ],
+      "notes": "Evidence from 2 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Creativity",
+      "requirement_ids": [
+        "req_002_8",
+        "req_002_1"
+      ],
+      "score": 3,
+      "evidence": [
+        "I managed the media club's Instagram",
+        "By the end of the year we were at about 2,100 and the Reels got way more reach than our posts",
+        "a 'thrift your look' challenge with a budget, because students care about price and showing their style"
+      ],
+      "notes": "Evidence from 3 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Organisation",
+      "requirement_ids": [
+        "req_002_4"
+      ],
+      "score": 4,
+      "evidence": [
+        "I used a shared Google Sheet with deadlines for each post"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Stakeholder management",
+      "requirement_ids": [
+        "req_002_9",
+        "req_002_3"
+      ],
+      "score": 2,
+      "evidence": [
+        "I just graduated from Zayed University in Communication and Media"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    }
+  ],
+  "overall": {
+    "strengths": [
+      "Engaged with the questions."
+    ],
+    "concerns": [
+      "Answers were mostly general, with few concrete examples."
+    ],
+    "recommendation": "hold",
+    "confidence": "medium",
+    "summary": "Offline heuristic report: average answer score 2.6/5 across 9 scored answers. Switch LLM_PROVIDER to openai for a written assessment.",
+    "suggested_next_round_focus": []
+  },
+  "flags": [
+    {
+      "type": "off_topic",
+      "detail": "t4: Asked about salary and remote work instead of answering; noted for the recruiter."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "question_id": "q1",
+      "agent_message": "To start, tell me a little about your background and what draws you to marketing for Gen Z shoppers.",
+      "candidate_answer": "Hi, I'm Mariam, I just graduated from Zayed University in Communication and Media.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": [
+          "req_002_3"
+        ],
+        "key_quote": "I just graduated from Zayed University in Communication and Media",
+        "score": 2,
+        "note": "Brief introduction; didn't say what draws her to marketing."
+      },
+      "decision": "move_on",
+      "decision_reason": "Warm-up; the next questions will draw out real examples."
+    },
+    {
+      "turn": 2,
+      "question_id": "q2",
+      "agent_message": "Thanks, Mariam. You ran the University Media Club's Instagram. What did you change while you ran it, and what happened as a result?",
+      "candidate_answer": "I managed the media club's Instagram.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": [
+          "req_002_1"
+        ],
+        "key_quote": "I managed the media club's Instagram",
+        "score": 2,
+        "note": "Restates the profile with no actions or results."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Thin profile: probe for actions and results instead of scoring low by default."
+    },
+    {
+      "turn": 3,
+      "question_id": "q2",
+      "agent_message": "Got it. Can you walk me through one specific thing you tried on the account and how you knew it worked?",
+      "candidate_answer": "When I took over we had around 600 followers. I started doing Reels of behind the scenes at our events and a weekly 'student of the week' series. By the end of the year we were at about 2,100 and the Reels got way more reach than our posts.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_002_1",
+          "req_002_8"
+        ],
+        "key_quote": "By the end of the year we were at about 2,100 and the Reels got way more reach than our posts",
+        "score": 4,
+        "note": "Clear actions (Reels, weekly series) with measurable growth."
+      },
+      "decision": "move_on",
+      "decision_reason": "Concrete actions and results given; competency evidenced."
+    },
+    {
+      "turn": 4,
+      "question_id": "q3",
+      "agent_message": "That's a great result, thanks. How did you know whether a post was working? Which numbers did you look at, and what did you do with them?",
+      "candidate_answer": "By the way, do you know if this role offers remote work? Also what's the salary?",
+      "analysis": {
+        "relevance": "off_topic",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": 1,
+        "note": "Asked about salary and remote work instead of answering; noted for the recruiter."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Off-topic; acknowledge the question and redirect once."
+    },
+    {
+      "turn": 5,
+      "question_id": "q3",
+      "agent_message": "Good questions. The hiring team will share details on pay and work arrangements. Coming back to my question: How did you know whether a post was working? Which numbers did you look at, and what did you do with them?",
+      "candidate_answer": "I looked at likes and views mostly.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": [
+          "req_002_2"
+        ],
+        "key_quote": "I looked at likes and views mostly",
+        "score": 2,
+        "note": "Surface metrics only; no example of acting on them."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Check whether she used the numbers to change anything."
+    },
+    {
+      "turn": 6,
+      "question_id": "q3",
+      "agent_message": "Okay. Did you ever notice a pattern in those numbers and change what or when you posted because of it?",
+      "candidate_answer": "I noticed Reels posted around 8 or 9pm got more views than morning ones, so we moved our schedule. I didn't track anything formally, I just checked Instagram insights.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_002_2"
+        ],
+        "key_quote": "Reels posted around 8 or 9pm got more views than morning ones, so we moved our schedule",
+        "score": 3,
+        "note": "Acted on a simple insight; no exposure to CTR or conversion yet."
+      },
+      "decision": "move_on",
+      "decision_reason": "Real but basic evidence; trainable gap for a graduate role."
+    },
+    {
+      "turn": 7,
+      "question_id": "q4",
+      "agent_message": "Thanks, that's useful. If you had to plan a TikTok campaign for Gen Z shoppers in the UAE on a small budget, what would you try first?",
+      "candidate_answer": "For Gen Z I'd do something on TikTok with student creators, like a 'thrift your look' challenge with a budget, because students care about price and showing their style.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_002_8",
+          "req_002_1"
+        ],
+        "key_quote": "a 'thrift your look' challenge with a budget, because students care about price and showing their style",
+        "score": 4,
+        "note": "Relevant, audience-aware idea with a clear reason."
+      },
+      "decision": "move_on",
+      "decision_reason": "Creative and well reasoned; enough evidence."
+    },
+    {
+      "turn": 8,
+      "question_id": "q5",
+      "agent_message": "I like that, thanks. Tell me about a time you juggled several deadlines at once. How did you keep track of everything?",
+      "candidate_answer": "I'm organised.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "vague",
+        "requirement_ids": [
+          "req_002_4"
+        ],
+        "key_quote": null,
+        "score": 1,
+        "note": "A claim with no example."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Draw out a real example instead of accepting a claim."
+    },
+    {
+      "turn": 9,
+      "question_id": "q5",
+      "agent_message": "Okay. Tell me about one week when you had several things due at once. What did you do to keep track?",
+      "candidate_answer": "During our media week I handled the content calendar for 5 days of events while doing my graduation project. I used a shared Google Sheet with deadlines for each post.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_002_4",
+          "req_002_7"
+        ],
+        "key_quote": "I used a shared Google Sheet with deadlines for each post",
+        "score": 4,
+        "note": "Managed a multi-day content calendar alongside her studies."
+      },
+      "decision": "move_on",
+      "decision_reason": "Concrete example with a method; competency evidenced."
+    },
+    {
+      "turn": 10,
+      "question_id": "q6",
+      "agent_message": "Thanks, that's a good example. How would you brief a content creator so they deliver what you need, on time, for a SouqBloom campaign?",
+      "candidate_answer": "I'm not sure, can you explain more?",
+      "analysis": {
+        "relevance": "no_answer",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": null,
+        "note": "Asked for clarification; no answer given."
+      },
+      "decision": "move_on",
+      "decision_reason": "No answer to assess; moving on."
+    }
+  ]
+}

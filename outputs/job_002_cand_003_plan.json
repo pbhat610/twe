@@ -1,0 +1,78 @@
+{
+  "interview_id": "int_109bf4249fb841d9",
+  "job_id": "job_002",
+  "candidate_id": "cand_003",
+  "created_at": "2026-11-15T17:57:49.214Z",
+  "candidate_summary": "Mariam is a fresh Communication and Media graduate with a thin profile: one extracurricular as Social Media Lead for the University Media Club, plus Instagram, Canva and CapCut. The risk is under-scoring her because little is written down, so questions should draw out real examples from the club. Analytics depth and juggling deliverables are the main things to verify.",
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "To start, tell me a little about your background and what draws you to marketing for Gen Z shoppers.",
+      "competency": "Written communication",
+      "requirement_ids": [
+        "req_002_3"
+      ],
+      "rationale": "Easy warm-up for a fresh graduate; also shows how clearly she communicates when talking about herself.",
+      "difficulty": "easy",
+      "type": "motivation"
+    },
+    {
+      "question_id": "q2",
+      "question": "You ran the University Media Club's Instagram. What did you change while you ran it, and what happened as a result?",
+      "competency": "Social media marketing",
+      "requirement_ids": [
+        "req_002_1",
+        "req_002_7"
+      ],
+      "rationale": "Her only listed experience; asking about changes and results draws out real evidence instead of scoring a thin profile low.",
+      "difficulty": "easy",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q3",
+      "question": "How did you know whether a post was working? Which numbers did you look at, and what did you do with them?",
+      "competency": "Basic analytics",
+      "requirement_ids": [
+        "req_002_2"
+      ],
+      "rationale": "The profile mentions no metrics; this probes whether she can read reach and engagement and act on them.",
+      "difficulty": "medium",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q4",
+      "question": "If you had to plan a TikTok campaign for Gen Z shoppers in the UAE on a small budget, what would you try first?",
+      "competency": "Creativity",
+      "requirement_ids": [
+        "req_002_8",
+        "req_002_1"
+      ],
+      "rationale": "Campaign thinking is a screening focus; a situational question lets a thin profile show creativity without prior campaign experience.",
+      "difficulty": "medium",
+      "type": "situational"
+    },
+    {
+      "question_id": "q5",
+      "question": "Tell me about a time you juggled several deadlines at once. How did you keep track of everything?",
+      "competency": "Organisation",
+      "requirement_ids": [
+        "req_002_4"
+      ],
+      "rationale": "The graduate program rotates across deliverables; her bio says hardworking but gives no evidence of organisation yet.",
+      "difficulty": "easy",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q6",
+      "question": "How would you brief a content creator so they deliver what you need, on time, for a SouqBloom campaign?",
+      "competency": "Stakeholder management",
+      "requirement_ids": [
+        "req_002_9",
+        "req_002_3"
+      ],
+      "rationale": "Working with creators is a core responsibility; checks practical written briefing and partner management.",
+      "difficulty": "medium",
+      "type": "situational"
+    }
+  ]
+}

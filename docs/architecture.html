@@ -1,0 +1,452 @@
+<title>+twe Interviewer Architecture</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap">
+<style>
+/* Layout: one reading column for text, figures break out wider and scroll sideways on phones. */
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --fg: #17191f; --muted: #5d6270; --line: #c9ccd6;
+  --node: #ffffff; --node-line: #9aa0ae; --core: #e9e6ff; --core-line: #5b4bd6;
+  --ext: #fff1e6; --ext-line: #c4621d; --dom: #e8f5ee; --dom-line: #2f8a57;
+  --gate: #f0f1f4; --accent: #5b4bd6; --ext-ink: #b5561a; --direct: #2f7fa8;
+  --display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12141a; --panel: #1a1d25; --fg: #e8eaf0; --muted: #9ca2b2; --line: #3a3f4d;
+  --node: #1f232c; --node-line: #5a6072; --core: #26214a; --core-line: #9d90ff;
+  --ext: #33241a; --ext-line: #e08a4a; --dom: #17301f; --dom-line: #5cc48a;
+  --gate: #23262f; --accent: #9d90ff; --ext-ink: #f0a066; --direct: #6cbde6; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #12141a; --panel: #1a1d25; --fg: #e8eaf0; --muted: #9ca2b2; --line: #3a3f4d;
+  --node: #1f232c; --node-line: #5a6072; --core: #26214a; --core-line: #9d90ff;
+  --ext: #33241a; --ext-line: #e08a4a; --dom: #17301f; --dom-line: #5cc48a;
+  --gate: #23262f; --accent: #9d90ff; --ext-ink: #f0a066; --direct: #6cbde6; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 40px; }
+.prose { max-width: 68ch; }
+h1 { font-family: var(--display); font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
+h1 .plus { color: var(--accent); }
+h2 { font-family: var(--display); font-size: 22px; margin: 0 0 6px; letter-spacing: -0.01em; }
+p { margin: 0; }
+.lede { color: var(--muted); font-size: 16px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px 20px 16px; }
+.scroll { overflow-x: auto; }
+.scroll svg { display: block; width: 100%; min-width: 1100px; height: auto; color: var(--fg); }
+#seq svg { min-width: 860px; }
+figcaption { color: var(--muted); font-size: 14px; margin-top: 14px; max-width: 90ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 18px; height: 12px; border-radius: 2px; border: 1.5px solid; display: inline-block; }
+.ln { width: 26px; height: 0; border-top: 2px solid; display: inline-block; }
+/* SVG styling (kept outside the SVG) */
+svg .node { fill: var(--node); stroke: var(--node-line); stroke-width: 1; }
+svg .core { fill: var(--core); stroke: var(--core-line); stroke-width: 1.5; }
+svg .ext { fill: var(--ext); stroke: var(--ext-line); stroke-width: 1; }
+svg .dom { fill: var(--dom); stroke: var(--dom-line); stroke-width: 1; }
+svg .gate { fill: var(--gate); stroke: var(--node-line); stroke-width: 1; stroke-dasharray: 3 2; }
+svg .api { fill: var(--core); stroke: var(--core-line); stroke-width: 1; }
+svg .group { fill: none; stroke: var(--line); stroke-width: 1.2; }
+svg .server { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 6 4; }
+svg text { fill: var(--fg); font-family: var(--sans); }
+svg .t { font-size: 12.5px; font-weight: 600; }
+svg .s { font-size: 11px; fill: var(--muted); }
+svg .g { font-size: 13px; font-weight: 600; fill: var(--muted); }
+svg .c { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; fill: var(--muted); }
+svg .l { font-size: 11px; fill: var(--fg); paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+svg .a { fill: none; stroke-width: 1.4; }
+svg .a.req { stroke: var(--fg); opacity: 0.7; }
+svg .a.ext { stroke: var(--ext-ink); }
+svg .a.direct { stroke: var(--direct); stroke-dasharray: 5 4; }
+svg .a.none { display: none; }
+svg .mk-req { fill: var(--fg); opacity: 0.8; }
+svg .mk-ext { fill: var(--ext-ink); }
+svg .mk-direct { fill: var(--direct); }
+svg .lane { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 4; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.layer { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; min-width: 0; }
+.layer h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.layer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.layer li { font-size: 13.5px; }
+.layer li b { font-weight: 600; }
+code, .path { font-family: var(--mono); font-size: 12px; }
+.path { color: var(--muted); display: block; overflow-wrap: anywhere; }
+.tbl { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
+tr:last-child td { border-bottom: 0; }
+section { display: grid; gap: 14px; }
+</style>
+
+<div class="wrap">
+  <header class="prose">
+    <div class="eyebrow">System architecture · Nov 2026</div>
+    <h1><span class="plus">+</span>twe AI Interviewer</h1>
+    <p class="lede">Two browsers, one Next.js app, a handful of outside services. The recruiter signs in and works by interview id; the candidate never signs in and works by a secret invite token. Every outside service sits behind a port, and <code>container.ts</code> picks the adapter from env.</p>
+  </header>
+
+  <section>
+    <div class="prose">
+      <h2>Block diagram</h2>
+      <p class="lede">Read left to right: browsers → routes → application → ports and adapters → outside services.</p>
+    </div>
+    <figure id="arch">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--node);border-color:var(--node-line)"></i>component</span>
+        <span><i class="sw" style="background:var(--core);border-color:var(--core-line)"></i>core / client API</span>
+        <span><i class="sw" style="background:var(--dom);border-color:var(--dom-line)"></i>pure domain rule</span>
+        <span><i class="sw" style="background:var(--ext);border-color:var(--ext-line)"></i>outside service</span>
+        <span><i class="ln" style="border-color:var(--fg);opacity:.7"></i>call inside the app</span>
+        <span><i class="ln" style="border-color:var(--ext-ink)"></i>HTTPS to a service</span>
+        <span><i class="ln" style="border-color:var(--direct);border-top-style:dashed"></i>browser goes direct, no server hop</span>
+      </div>
+      <div class="scroll"><svg viewBox="0 0 1500 1046" role="img" aria-label="Block diagram: recruiter and candidate browsers call Next.js route handlers; recruiter routes are behind an auth proxy, candidate routes use the invite token. Routes call one InterviewService, which uses the planner, analyser and report writer agents and talks to OpenAI, ElevenLabs, Supabase and Simli only through port adapters chosen by container.ts.">
+<defs>
+<marker id="ah-req" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-req"/></marker>
+<marker id="ah-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-ext"/></marker>
+<marker id="ah-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-direct"/></marker>
+<marker id="ah-none" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="0.1" markerHeight="0.1"><path d="M0,0" /></marker>
+</defs>
+<rect class="group" x="16" y="40" width="300" height="430" rx="6"/>
+<text class="g" x="28" y="60">Recruiter browser</text>
+<rect class="node" x="30" y="72" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="89">/login</text>
+<text class="s" x="40" y="104">LoginForm</text>
+<rect class="node" x="30" y="120" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="137">/  Dashboard</text>
+<text class="s" x="40" y="152">SetupForm · InviteCard · RecentInterviews</text>
+<rect class="node" x="30" y="168" width="272" height="54" rx="4"/>
+<text class="t" x="40" y="185">/interviews/:id  Monitor</text>
+<text class="s" x="40" y="200">SidePanel: transcript, reasoning,</text>
+<text class="s" x="40" y="214">integrity · RecordingPlayer</text>
+<rect class="node" x="30" y="230" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="247">/report/:id</text>
+<text class="s" x="40" y="262">ReportView (scores, quotes, flags)</text>
+<rect class="api" x="30" y="400" width="272" height="54" rx="4"/>
+<text class="t" x="40" y="417">recruiterApi</text>
+<text class="s" x="40" y="432">lib/api.ts · cookie sent</text>
+<rect class="group" x="16" y="500" width="300" height="470" rx="6"/>
+<text class="g" x="28" y="520">Candidate browser  /i/:token</text>
+<rect class="node" x="30" y="532" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="549">PreJoin</text>
+<text class="s" x="40" y="564">camera, mic, recording consent</text>
+<rect class="node" x="30" y="580" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="597">InterviewRoom + CallControls</text>
+<text class="s" x="40" y="612">video-call UI, captions, warnings</text>
+<rect class="node" x="30" y="628" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="645">useInterviewFlow</text>
+<text class="s" x="40" y="660">speak → listen → submit → next</text>
+<rect class="node" x="30" y="676" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="693">Avatar engine</text>
+<text class="s" x="40" y="708">TalkingHead 3D → 2D face | Simli</text>
+<rect class="node" x="30" y="724" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="741">useRecorder</text>
+<text class="s" x="40" y="756">mic answer → audio blob</text>
+<rect class="node" x="30" y="772" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="789">useProctoring + faceMonitor</text>
+<text class="s" x="40" y="804">browser signals · MediaPipe face</text>
+<rect class="node" x="30" y="820" width="272" height="40" rx="4"/>
+<text class="t" x="40" y="837">SessionRecorder</text>
+<text class="s" x="40" y="852">cam + mic + Aria voice, 5 s chunks</text>
+<rect class="api" x="30" y="900" width="272" height="54" rx="4"/>
+<text class="t" x="40" y="917">candidateApi</text>
+<text class="s" x="40" y="932">lib/api.ts · invite token in URL</text>
+<rect class="server" x="340" y="20" width="790" height="960" rx="6"/>
+<text class="g" x="352" y="40">Next.js 16 app on Vercel (one deploy)</text>
+<text class="c" x="356" y="68">EDGE &amp; ROUTES</text>
+<rect class="gate" x="356" y="76" width="210" height="40" rx="4"/>
+<text class="t" x="366" y="93">proxy.ts</text>
+<text class="s" x="366" y="108">auth gate: recruiter paths</text>
+<rect class="node" x="356" y="124" width="210" height="40" rx="4"/>
+<text class="t" x="366" y="141">/api/auth/*</text>
+<text class="s" x="366" y="156">login · logout → signed cookie</text>
+<rect class="node" x="356" y="236" width="210" height="96" rx="4"/>
+<text class="t" x="366" y="253">/api/interviews/**</text>
+<text class="s" x="366" y="268">handleRecruiter (re-checks cookie)</text>
+<text class="s" x="366" y="282">POST create · GET list</text>
+<text class="s" x="366" y="296">GET :id · report</text>
+<text class="s" x="366" y="310">recording manifest · chunks</text>
+<rect class="node" x="356" y="340" width="210" height="40" rx="4"/>
+<text class="t" x="366" y="357">/api/catalog</text>
+<text class="s" x="366" y="372">jobs + candidates</text>
+<rect class="node" x="356" y="540" width="210" height="124" rx="4"/>
+<text class="t" x="366" y="557">/api/i/[token]/**</text>
+<text class="s" x="366" y="572">view · join (consent)</text>
+<text class="s" x="366" y="586">answers · finish</text>
+<text class="s" x="366" y="600">speech/:utteranceId</text>
+<text class="s" x="366" y="614">transcribe · proctoring</text>
+<text class="s" x="366" y="628">recording · simulated-answer</text>
+<rect class="node" x="356" y="676" width="210" height="40" rx="4"/>
+<text class="t" x="366" y="693">/api/avatar/session</text>
+<text class="s" x="366" y="708">Simli token or &#x27;local&#x27;</text>
+<rect class="node" x="356" y="900" width="210" height="54" rx="4"/>
+<text class="t" x="366" y="917">lib/auth.ts</text>
+<text class="s" x="366" y="932">HMAC-SHA256 session cookie</text>
+<text class="s" x="366" y="946">creds from env</text>
+<text class="c" x="596" y="68">APPLICATION (PURE)</text>
+<rect class="node" x="596" y="76" width="240" height="54" rx="4"/>
+<text class="t" x="606" y="93">views.ts</text>
+<text class="s" x="606" y="108">RecruiterView: everything</text>
+<text class="s" x="606" y="122">CandidateView: redacted</text>
+<rect class="core" x="596" y="236" width="240" height="96" rx="4"/>
+<text class="t" x="606" y="253">InterviewService</text>
+<text class="s" x="606" y="268">invited → in_progress → completed</text>
+<text class="s" x="606" y="296">create · join · submitAnswer · finish</text>
+<text class="s" x="606" y="310">report · recordProctoring · recordChunk</text>
+<rect class="node" x="596" y="400" width="240" height="40" rx="4"/>
+<text class="t" x="606" y="417">QuestionPlanner</text>
+<text class="s" x="606" y="432">5–7 Qs, repair round, schema check</text>
+<rect class="node" x="596" y="448" width="240" height="40" rx="4"/>
+<text class="t" x="606" y="465">AnswerAnalyzer</text>
+<text class="s" x="606" y="480">score, evidence, follow-up idea</text>
+<rect class="node" x="596" y="496" width="240" height="40" rx="4"/>
+<text class="t" x="606" y="513">ReportWriter</text>
+<text class="s" x="606" y="528">grounded quotes, integrity concern</text>
+<rect class="dom" x="596" y="560" width="240" height="40" rx="4"/>
+<text class="t" x="606" y="577">FollowUpPolicy</text>
+<text class="s" x="606" y="592">hard cap: 2 per question</text>
+<rect class="node" x="596" y="608" width="240" height="54" rx="4"/>
+<text class="t" x="606" y="625">Guardrails</text>
+<text class="s" x="606" y="640">ProtectedTopicGuard · PromptInjection</text>
+<text class="s" x="606" y="654">fenceUntrusted prompts</text>
+<rect class="dom" x="596" y="670" width="240" height="54" rx="4"/>
+<text class="t" x="606" y="687">Domain rules</text>
+<text class="s" x="606" y="702">quoteGrounding · proctoring</text>
+<text class="s" x="606" y="716">recording limits</text>
+<rect class="gate" x="596" y="900" width="240" height="54" rx="4"/>
+<text class="t" x="606" y="917">container.ts</text>
+<text class="s" x="606" y="932">composition root: picks adapters</text>
+<text class="s" x="606" y="946">from env at startup</text>
+<text class="c" x="866" y="68">PORTS → ADAPTERS</text>
+<rect class="node" x="866" y="76" width="248" height="54" rx="4"/>
+<text class="t" x="876" y="93">Catalog + SchemaValidator</text>
+<text class="s" x="876" y="108">data/*.json · Ajv vs official</text>
+<text class="s" x="876" y="122">schemas (bundled statically)</text>
+<rect class="node" x="866" y="400" width="248" height="136" rx="4"/>
+<text class="t" x="876" y="417">StructuredLLM</text>
+<text class="s" x="876" y="432">OpenAI Responses API + zod</text>
+<text class="s" x="876" y="446">structured outputs</text>
+<text class="s" x="876" y="460"></text>
+<text class="s" x="876" y="474">offline: HeuristicLLM</text>
+<rect class="node" x="866" y="552" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="569">SpeechSynthesizer</text>
+<text class="s" x="876" y="584">ElevenLabs | OpenAI TTS, cached</text>
+<rect class="node" x="866" y="600" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="617">SpeechTranscriber</text>
+<text class="s" x="876" y="632">OpenAI transcribe</text>
+<rect class="node" x="866" y="648" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="665">ContentModerator</text>
+<text class="s" x="876" y="680">omni-moderation | no-op</text>
+<rect class="node" x="866" y="710" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="727">SessionRepository</text>
+<text class="s" x="876" y="742">Supabase (versioned) | memory</text>
+<rect class="node" x="866" y="758" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="775">ProctoringRepository</text>
+<text class="s" x="876" y="790">append-only · Supabase | memory</text>
+<rect class="node" x="866" y="806" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="823">RecordingStore</text>
+<text class="s" x="876" y="838">Storage bucket | memory</text>
+<rect class="node" x="866" y="860" width="248" height="40" rx="4"/>
+<text class="t" x="876" y="877">AvatarSessionIssuer</text>
+<text class="s" x="876" y="892">Simli | local</text>
+<text class="c" x="1160" y="68">EXTERNAL SERVICES</text>
+<rect class="ext" x="1160" y="400" width="320" height="136" rx="4"/>
+<text class="t" x="1170" y="417">OpenAI API</text>
+<text class="s" x="1170" y="432">gpt-5.4-mini: plan, analyse, report</text>
+<text class="s" x="1170" y="446">gpt-4o-mini-transcribe</text>
+<text class="s" x="1170" y="460">omni-moderation (free)</text>
+<text class="s" x="1170" y="474">TTS fallback</text>
+<rect class="ext" x="1160" y="552" width="320" height="40" rx="4"/>
+<text class="t" x="1170" y="569">ElevenLabs</text>
+<text class="s" x="1170" y="584">eleven_v4_turbo interviewer voice</text>
+<rect class="ext" x="1160" y="710" width="320" height="136" rx="4"/>
+<text class="t" x="1170" y="727">Supabase</text>
+<text class="s" x="1170" y="742">Postgres: interviews (JSONB + version)</text>
+<text class="s" x="1170" y="756">Postgres: proctoring_events</text>
+<text class="s" x="1170" y="770">Storage: interview-recordings (private)</text>
+<text class="s" x="1170" y="784">RLS on, server key only</text>
+<rect class="ext" x="1160" y="860" width="320" height="40" rx="4"/>
+<text class="t" x="1170" y="877">Simli (optional)</text>
+<text class="s" x="1170" y="892">photoreal face over WebRTC</text>
+<rect class="ext" x="1160" y="920" width="320" height="54" rx="4"/>
+<text class="t" x="1170" y="937">Google model bucket</text>
+<text class="s" x="1170" y="952">MediaPipe face_landmarker.task</text>
+<text class="s" x="1170" y="966">fetched by candidate browser</text>
+<path class="a req" d="M302,92 L356,92" marker-end="url(#ah-req)"/>
+<text class="l" x="329" y="86" text-anchor="middle">pages</text>
+<path class="a req" d="M166,72 L166,50 L461,50 L461,124" marker-end="url(#ah-req)"/>
+<text class="l" x="300" y="45" text-anchor="middle">POST credentials</text>
+<path class="a req" d="M302,427 L330,427 L330,284 L356,284" marker-end="url(#ah-req)"/>
+<path class="a req" d="M302,927 L326,927 L326,602 L356,602" marker-end="url(#ah-req)"/>
+<path class="a req" d="M302,696 L356,696" marker-end="url(#ah-req)"/>
+<path class="a req" d="M566,284 L596,284" marker-end="url(#ah-req)"/>
+<path class="a req" d="M566,560 L581,560 L581,320 L596,320" marker-end="url(#ah-req)"/>
+<path class="a req" d="M716,236 L716,130" marker-end="url(#ah-req)"/>
+<text class="l" x="724" y="186" text-anchor="start">maps to</text>
+<path class="a req" d="M626,332 L626,400" marker-end="url(#ah-req)"/>
+<text class="l" x="632" y="370" text-anchor="start">runs</text>
+<path class="a req" d="M836,420 L866,420" marker-end="url(#ah-req)"/>
+<path class="a req" d="M836,468 L866,468" marker-end="url(#ah-req)"/>
+<path class="a req" d="M836,516 L866,516" marker-end="url(#ah-req)"/>
+<path class="a req" d="M836,300 L846,300 L846,730 L866,730" marker-end="url(#ah-req)"/>
+<path class="a req" d="M846,778 L866,778" marker-end="url(#ah-req)"/>
+<path class="a req" d="M846,826 L866,826" marker-end="url(#ah-req)"/>
+<path class="a req" d="M566,640 L586,640 L586,790 L856,790 L856,572 L866,572" marker-end="url(#ah-req)"/>
+<text class="l" x="720" y="804" text-anchor="middle">speech · transcribe</text>
+<path class="a req" d="M856,620 L866,620" marker-end="url(#ah-req)"/>
+<path class="a req" d="M566,706 L576,706 L576,880 L866,880" marker-end="url(#ah-req)"/>
+<path class="a ext" d="M1114,468 L1160,468" marker-end="url(#ah-ext)"/>
+<text class="l" x="1137" y="462" text-anchor="middle">HTTPS</text>
+<path class="a ext" d="M1114,572 L1160,572" marker-end="url(#ah-ext)"/>
+<path class="a ext" d="M1114,620 L1137,620 L1137,520 L1160,520" marker-end="url(#ah-ext)"/>
+<path class="a ext" d="M1114,668 L1145,668 L1145,528 L1160,528" marker-end="url(#ah-ext)"/>
+<path class="a ext" d="M1114,730 L1160,730" marker-end="url(#ah-ext)"/>
+<text class="l" x="1137" y="724" text-anchor="middle">SQL</text>
+<path class="a ext" d="M1114,778 L1160,778" marker-end="url(#ah-ext)"/>
+<path class="a ext" d="M1114,826 L1160,826" marker-end="url(#ah-ext)"/>
+<path class="a ext" d="M1114,880 L1160,880" marker-end="url(#ah-ext)"/>
+<path class="a direct" d="M166,970 L166,1004 L1320,1004 L1320,974" marker-end="url(#ah-direct)"/>
+<text class="l" x="740" y="1018" text-anchor="middle">loads face model directly</text>
+<path class="a direct" d="M302,706 L320,706 L320,992 L1494,992 L1494,890 L1480,890" marker-end="url(#ah-direct)"/>
+<text class="l" x="1240" y="1018" text-anchor="middle">WebRTC video (Simli only)</text>
+<path class="a direct" d="M166,40 L166,10 L1494,10 L1494,790 L1480,790" marker-end="url(#ah-direct)"/>
+<text class="l" x="740" y="24" text-anchor="middle">recruiter plays recording via 1-hour signed URLs</text>
+</svg></div>
+      <figcaption>Recruiter pages pass the <code>proxy.ts</code> gate and every recruiter API re-checks the signed cookie. Candidate routes need only the token and return a redacted view. All business logic runs in <code>InterviewService</code> and its three agents; vendors are reached only through the adapters in the fourth column. Three paths skip the server on purpose: the face model download, Simli's video stream, and recording playback through signed Storage URLs.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h2>One answer, end to end</h2>
+      <p class="lede">What happens between the candidate finishing an answer and Aria asking the next question.</p>
+    </div>
+    <figure id="seq">
+      <div class="scroll"><svg viewBox="0 0 1100 634" role="img" aria-label="Sequence of one answer: the browser sends audio for transcription, then posts the text; the server checks it, asks the LLM for an analysis, applies grounding, topic guard and the follow-up cap, saves with a version check, pre-warms the next line's voice, and returns a redacted view; the browser then fetches and plays the next line.">
+<defs>
+<marker id="sh-req" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-req"/></marker>
+<marker id="sh-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-ext"/></marker>
+</defs>
+<rect class="node" x="10" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="90" y="28" text-anchor="middle">Candidate browser</text>
+<line class="lane" x1="90" y1="38" x2="90" y2="626"/>
+<rect class="node" x="200" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="280" y="28" text-anchor="middle">Route handlers</text>
+<line class="lane" x1="280" y1="38" x2="280" y2="626"/>
+<rect class="core" x="390" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="470" y="28" text-anchor="middle">InterviewService</text>
+<line class="lane" x1="470" y1="38" x2="470" y2="626"/>
+<rect class="ext" x="610" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="690" y="28" text-anchor="middle">OpenAI</text>
+<line class="lane" x1="690" y1="38" x2="690" y2="626"/>
+<rect class="ext" x="780" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="860" y="28" text-anchor="middle">ElevenLabs</text>
+<line class="lane" x1="860" y1="38" x2="860" y2="626"/>
+<rect class="ext" x="940" y="8" width="160" height="30" rx="4"/>
+<text class="t" x="1020" y="28" text-anchor="middle">Supabase</text>
+<line class="lane" x1="1020" y1="38" x2="1020" y2="626"/>
+<path class="a req" d="M90,70 L274,70" marker-end="url(#sh-req)"/>
+<text class="l" x="185.0" y="64" text-anchor="middle">1. POST /transcribe (answer audio)</text>
+<path class="a ext" d="M280,104 L684,104" marker-end="url(#sh-ext)"/>
+<text class="l" x="485.0" y="98" text-anchor="middle">2. transcribe, job keywords</text>
+<path class="a ext" d="M690,138 L286,138" marker-end="url(#sh-ext)"/>
+<text class="l" x="485.0" y="132" text-anchor="middle">3. text</text>
+<path class="a req" d="M280,172 L96,172" marker-end="url(#sh-req)"/>
+<text class="l" x="185.0" y="166" text-anchor="middle">4. text</text>
+<path class="a req" d="M90,206 L274,206" marker-end="url(#sh-req)"/>
+<text class="l" x="185.0" y="200" text-anchor="middle">5. POST /answers {turnId, text}</text>
+<path class="a req" d="M280,240 L464,240" marker-end="url(#sh-req)"/>
+<text class="l" x="375.0" y="234" text-anchor="middle">6. submitAnswer(token, …)</text>
+<path class="a ext" d="M470,274 L684,274" marker-end="url(#sh-ext)"/>
+<text class="l" x="580.0" y="268" text-anchor="middle">7. moderation ∥ AnswerAnalyzer</text>
+<path class="a ext" d="M690,308 L476,308" marker-end="url(#sh-ext)"/>
+<text class="l" x="580.0" y="302" text-anchor="middle">8. score, evidence, follow-up idea</text>
+<path class="a req" d="M470,342 L510,342 L510,358 L476,358" marker-end="url(#sh-req)"/>
+<text class="l" x="518" y="354">9. ground quotes · topic guard · cap ≤ 2</text>
+<path class="a ext" d="M470,376 L1014,376" marker-end="url(#sh-ext)"/>
+<text class="l" x="745.0" y="370" text-anchor="middle">10. save session (version check)</text>
+<path class="a ext" d="M470,410 L854,410" marker-end="url(#sh-ext)"/>
+<text class="l" x="665.0" y="404" text-anchor="middle">11. pre-warm next line (async)</text>
+<path class="a req" d="M470,444 L286,444" marker-end="url(#sh-req)"/>
+<text class="l" x="375.0" y="438" text-anchor="middle">12. CandidateView (redacted)</text>
+<path class="a req" d="M280,478 L96,478" marker-end="url(#sh-req)"/>
+<text class="l" x="185.0" y="472" text-anchor="middle">13. next turn + utterance id</text>
+<path class="a req" d="M90,512 L274,512" marker-end="url(#sh-req)"/>
+<text class="l" x="185.0" y="506" text-anchor="middle">14. GET /speech/:utteranceId</text>
+<path class="a ext" d="M280,546 L854,546" marker-end="url(#sh-ext)"/>
+<text class="l" x="570.0" y="540" text-anchor="middle">15. synthesize (cache hit)</text>
+<path class="a ext" d="M860,580 L96,580" marker-end="url(#sh-ext)"/>
+<text class="l" x="475.0" y="574" text-anchor="middle">16. mp3 → avatar lip-syncs</text>
+</svg></div>
+      <figcaption>The server owns every decision: the LLM suggests a follow-up, but grounding, the protected-topic guard and the two-follow-up cap run in code before anything is spoken. Proctoring events and 5-second recording chunks upload in parallel on their own routes and tables, so they never block or conflict with this flow.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="prose"><h2>Components by layer</h2></div>
+    <div class="grid">
+      <div class="layer"><h3>Recruiter browser</h3><ul>
+        <li><b>Login</b><span class="path">components/auth/LoginForm.tsx</span></li>
+        <li><b>Dashboard: create link, list</b><span class="path">components/setup/SetupForm · InviteCard · RecentInterviews</span></li>
+        <li><b>Live monitor + integrity + recording</b><span class="path">components/recruiter/InterviewMonitor · RecordingPlayer, interview/SidePanel</span></li>
+        <li><b>Report</b><span class="path">components/report/ReportView.tsx</span></li>
+      </ul></div>
+      <div class="layer"><h3>Candidate browser</h3><ul>
+        <li><b>Device check + consent</b><span class="path">components/interview/PreJoin.tsx, hooks/useWebcam.ts</span></li>
+        <li><b>Call room + loop</b><span class="path">InterviewRoom · CallControls, hooks/useInterviewFlow.ts</span></li>
+        <li><b>Avatar engines</b><span class="path">interview/avatar/ talkingHead · face · simli</span></li>
+        <li><b>Proctoring</b><span class="path">hooks/useProctoring.ts, proctoring/faceMonitor · integrityRules</span></li>
+        <li><b>Recording</b><span class="path">hooks/useSessionRecording.ts, recording/sessionRecorder.ts</span></li>
+      </ul></div>
+      <div class="layer"><h3>Edge &amp; routes</h3><ul>
+        <li><b>Auth gate</b><span class="path">src/proxy.ts, lib/auth.ts, lib/http.ts (handleRecruiter)</span></li>
+        <li><b>Recruiter API</b><span class="path">app/api/interviews/**, app/api/catalog</span></li>
+        <li><b>Candidate API</b><span class="path">app/api/i/[token]/**</span></li>
+        <li><b>Avatar token</b><span class="path">app/api/avatar/session</span></li>
+      </ul></div>
+      <div class="layer"><h3>Application &amp; domain</h3><ul>
+        <li><b>State machine</b><span class="path">application/interviewService.ts</span></li>
+        <li><b>Agents + zod output schemas</b><span class="path">application/agents/ questionPlanner · answerAnalyzer · reportWriter · schemas</span></li>
+        <li><b>Guardrails + prompts</b><span class="path">application/guardrails/*, application/prompts</span></li>
+        <li><b>Read models</b><span class="path">application/views.ts</span></li>
+        <li><b>Pure rules</b><span class="path">domain/ followUpPolicy · quoteGrounding · proctoring · recording</span></li>
+      </ul></div>
+      <div class="layer"><h3>Ports &amp; adapters</h3><ul>
+        <li><b>Interfaces</b><span class="path">ports/index.ts</span></li>
+        <li><b>OpenAI (LLM, STT, TTS, moderation)</b><span class="path">infrastructure/openai/*</span></li>
+        <li><b>ElevenLabs voice</b><span class="path">infrastructure/elevenlabs/*</span></li>
+        <li><b>Supabase / in-memory stores</b><span class="path">infrastructure/supabase/*, infrastructure/memory/*</span></li>
+        <li><b>Offline LLM, Ajv, catalog, Simli</b><span class="path">fakes/heuristicLLM, validation/ajv…, data/file…, simli/*</span></li>
+        <li><b>Wiring</b><span class="path">src/container.ts</span></li>
+      </ul></div>
+      <div class="layer"><h3>Data &amp; schema</h3><ul>
+        <li><b>Demo data + official schemas</b><span class="path">data/*.json, data/schemas/*</span></li>
+        <li><b>Postgres tables + Storage bucket</b><span class="path">supabase/migrations/0001 · 0002 · 0003</span></li>
+        <li><b>Sample report</b><span class="path">outputs/*_report.json (npm run simulate)</span></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h2>What env switches</h2>
+      <p class="lede">Same code everywhere; <code>container.ts</code> reads these once at startup.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Concern</th><th>Set</th><th>Used</th><th>Not set</th></tr></thead>
+      <tbody>
+        <tr><td>Brain (plan, analyse, report)</td><td><code>OPENAI_API_KEY</code></td><td>OpenAI <code>gpt-5.4-mini</code>, structured outputs</td><td>HeuristicLLM, offline demo</td></tr>
+        <tr><td>Interviewer voice</td><td><code>ELEVENLABS_API_KEY</code></td><td>ElevenLabs <code>eleven_v4_turbo</code></td><td>OpenAI TTS, else the browser voice</td></tr>
+        <tr><td>Candidate speech</td><td><code>OPENAI_API_KEY</code></td><td>OpenAI transcribe, mic answers</td><td>Typed answers only</td></tr>
+        <tr><td>Avatar</td><td><code>AVATAR_PROVIDER=simli</code> + <code>SIMLI_API_KEY</code></td><td>Simli photoreal face</td><td>TalkingHead 3D → 2D face (default)</td></tr>
+        <tr><td>Storage</td><td><code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Postgres + Storage bucket</td><td>In-memory (local dev only)</td></tr>
+        <tr><td>Recruiter login</td><td><code>RECRUITER_EMAIL</code>, <code>RECRUITER_PASSWORD</code>, <code>AUTH_SECRET</code></td><td>Signed 8 h cookie</td><td>Login refused with setup message</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</div>

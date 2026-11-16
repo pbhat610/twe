@@ -1,0 +1,90 @@
+{
+  "interview_id": "int_d3707b01c5084a64",
+  "job_id": "job_003",
+  "candidate_id": "cand_004",
+  "created_at": "2026-11-15T18:41:57.730Z",
+  "candidate_summary": "Statistics student | SQL + Python | Kaggle enthusiast Recent: Data Intern (part-time) at Food Delivery Startup (fictional). Skills: SQL, Python, pandas, Power BI, Excel, scikit-learn (basic).",
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "To start, tell me about a finding from your own data work that changed what someone actually did.",
+      "competency": "Data storytelling",
+      "requirement_ids": [
+        "req_003_4",
+        "req_003_5"
+      ],
+      "rationale": "The team's analyses must lead to decisions by ops managers.",
+      "difficulty": "easy",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q2",
+      "question": "Walk me through a SQL query you're proud of, for example one using joins or window functions.",
+      "competency": "SQL",
+      "requirement_ids": [
+        "req_003_1"
+      ],
+      "rationale": "Joins, aggregations and window functions are named in the must-have.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q3",
+      "question": "How would you design an A/B test to check whether a new rider bonus reduces evening delivery times?",
+      "competency": "A/B testing",
+      "requirement_ids": [
+        "req_003_6",
+        "req_003_3"
+      ],
+      "rationale": "The intern helps design and read A/B tests on Dune Mobility's own metrics.",
+      "difficulty": "hard",
+      "type": "situational"
+    },
+    {
+      "question_id": "q4",
+      "question": "Tell me about a dataset you cleaned in Python or R. What did you do about missing or messy values?",
+      "competency": "Python or R for analysis",
+      "requirement_ids": [
+        "req_003_2",
+        "req_003_8"
+      ],
+      "rationale": "Checks pandas-style cleaning and attention to detail with real data.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q5",
+      "question": "Tell me about a time a number in your data looked wrong. How did you dig into why?",
+      "competency": "Curiosity",
+      "requirement_ids": [
+        "req_003_7",
+        "req_003_8"
+      ],
+      "rationale": "Curiosity about why numbers look the way they do is a stated soft skill.",
+      "difficulty": "medium",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q6",
+      "question": "Delivery times are often skewed by a few very late orders. How would you summarise them for an ops manager?",
+      "competency": "Statistics basics",
+      "requirement_ids": [
+        "req_003_3"
+      ],
+      "rationale": "Directly tests averages versus medians and distributions on the team's own kind of data.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q7",
+      "question": "Finally, what makes you want to analyse ride-hailing and delivery data at Dune Mobility?",
+      "competency": "Curiosity",
+      "requirement_ids": [
+        "req_003_7"
+      ],
+      "rationale": "Closes with motivation for the domain and the six-month internship.",
+      "difficulty": "easy",
+      "type": "motivation"
+    }
+  ]
+}

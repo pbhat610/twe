@@ -1,0 +1,127 @@
+[
+  {
+    "job_id": "job_001",
+    "title": "Junior Full Stack Engineer",
+    "company": {
+      "name": "FalconPay",
+      "industry": "Fintech",
+      "size": "50-200 employees",
+      "about": "FalconPay builds payment links and invoicing tools for SMEs across the GCC."
+    },
+    "location": "Dubai Internet City, UAE",
+    "work_mode": "Hybrid (3 days in office)",
+    "employment_type": "Full-time",
+    "experience_level": "0-2 years",
+    "salary_range_aed_monthly": { "min": 9000, "max": 13000 },
+    "description": "You'll join a 6-person product squad shipping features on our merchant dashboard and payments API. You'll work across a React/Next.js frontend and a Node.js/PostgreSQL backend, with real ownership from week one.",
+    "responsibilities": [
+      "Build and ship features end to end across frontend and backend",
+      "Write and maintain REST APIs used by merchants and internal teams",
+      "Write tests and take part in code reviews",
+      "Debug production issues with senior engineers",
+      "Collaborate with product and design on scoping"
+    ],
+    "requirements": {
+      "must_have": [
+        { "id": "req_001_1", "skill": "JavaScript/TypeScript", "detail": "Comfortable building real features, not just tutorials" },
+        { "id": "req_001_2", "skill": "React", "detail": "State management, component design, data fetching" },
+        { "id": "req_001_3", "skill": "Backend APIs", "detail": "Built at least one REST API with Node.js or similar" },
+        { "id": "req_001_4", "skill": "SQL databases", "detail": "Schema design and writing queries, ideally PostgreSQL" },
+        { "id": "req_001_5", "skill": "Git and collaboration", "detail": "Branches, pull requests, reviewing others' code" }
+      ],
+      "nice_to_have": [
+        { "id": "req_001_6", "skill": "Payments or fintech exposure" },
+        { "id": "req_001_7", "skill": "Docker / cloud deployment (AWS or GCP)" },
+        { "id": "req_001_8", "skill": "Automated testing (Jest, Playwright)" }
+      ],
+      "soft_skills": [
+        { "id": "req_001_9", "skill": "Ownership", "detail": "Takes a task from idea to production" },
+        { "id": "req_001_10", "skill": "Communication", "detail": "Explains technical trade-offs to non-engineers" }
+      ]
+    },
+    "screening_focus": ["technical depth", "problem solving", "ownership"],
+    "interview_language": "English"
+  },
+  {
+    "job_id": "job_002",
+    "title": "Graduate Marketing Executive",
+    "company": {
+      "name": "SouqBloom",
+      "industry": "E-commerce (fashion and beauty)",
+      "size": "200-500 employees",
+      "about": "SouqBloom is a UAE-based online marketplace for regional fashion and beauty brands."
+    },
+    "location": "Dubai Media City, UAE",
+    "work_mode": "On-site",
+    "employment_type": "Full-time (Graduate Program, 12 months)",
+    "experience_level": "Fresh graduate",
+    "salary_range_aed_monthly": { "min": 7000, "max": 9000 },
+    "description": "Rotate across performance marketing, social, and influencer partnerships. You'll help plan campaigns aimed at Gen Z shoppers in the UAE and KSA.",
+    "responsibilities": [
+      "Support planning and execution of social and influencer campaigns",
+      "Track campaign performance and prepare weekly reports",
+      "Coordinate with creators and agencies on deliverables",
+      "Contribute content ideas for TikTok and Instagram",
+      "Support on-ground activations and university events"
+    ],
+    "requirements": {
+      "must_have": [
+        { "id": "req_002_1", "skill": "Social media marketing", "detail": "Understands TikTok/Instagram content and trends" },
+        { "id": "req_002_2", "skill": "Basic analytics", "detail": "Can read reach, engagement, CTR, conversion" },
+        { "id": "req_002_3", "skill": "Written communication", "detail": "Clear briefs and captions in English" },
+        { "id": "req_002_4", "skill": "Organisation", "detail": "Juggles multiple deliverables and deadlines" }
+      ],
+      "nice_to_have": [
+        { "id": "req_002_5", "skill": "Arabic copywriting" },
+        { "id": "req_002_6", "skill": "Canva / CapCut / basic video editing" },
+        { "id": "req_002_7", "skill": "Experience running a student club or event" }
+      ],
+      "soft_skills": [
+        { "id": "req_002_8", "skill": "Creativity" },
+        { "id": "req_002_9", "skill": "Stakeholder management", "detail": "Working with creators and external partners" }
+      ]
+    },
+    "screening_focus": ["campaign thinking", "data literacy", "creativity"],
+    "interview_language": "English"
+  },
+  {
+    "job_id": "job_003",
+    "title": "Data Analyst Intern",
+    "company": {
+      "name": "Dune Mobility",
+      "industry": "Ride-hailing and delivery",
+      "size": "1000+ employees",
+      "about": "Dune Mobility runs ride-hailing and last-mile delivery across the UAE."
+    },
+    "location": "Dubai Science Park, UAE",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship (6 months, paid)",
+    "experience_level": "Student or fresh graduate",
+    "salary_range_aed_monthly": { "min": 4000, "max": 5000 },
+    "description": "Join the Operations Analytics team to analyse driver supply, delivery times and customer retention, and build dashboards used by city managers.",
+    "responsibilities": [
+      "Write SQL to pull and clean operational data",
+      "Build and maintain dashboards in Looker or Power BI",
+      "Run ad-hoc analyses and present findings to ops managers",
+      "Help design and read A/B tests"
+    ],
+    "requirements": {
+      "must_have": [
+        { "id": "req_003_1", "skill": "SQL", "detail": "Joins, aggregations, window functions" },
+        { "id": "req_003_2", "skill": "Python or R for analysis", "detail": "pandas or equivalent" },
+        { "id": "req_003_3", "skill": "Statistics basics", "detail": "Averages vs medians, distributions, significance" },
+        { "id": "req_003_4", "skill": "Data storytelling", "detail": "Turns analysis into a clear recommendation" }
+      ],
+      "nice_to_have": [
+        { "id": "req_003_5", "skill": "Dashboard tools (Power BI, Looker, Tableau)" },
+        { "id": "req_003_6", "skill": "A/B testing" }
+      ],
+      "soft_skills": [
+        { "id": "req_003_7", "skill": "Curiosity", "detail": "Asks why the numbers look the way they do" },
+        { "id": "req_003_8", "skill": "Attention to detail" }
+      ]
+    },
+    "screening_focus": ["analytical thinking", "SQL depth", "communication of insights"],
+    "interview_language": "English"
+  }
+]

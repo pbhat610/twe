@@ -1,0 +1,86 @@
+{
+  "interview_id": "int_212e54a4fce0492e",
+  "job_id": "job_001",
+  "candidate_id": "cand_002",
+  "created_at": "2026-11-15T17:57:44.562Z",
+  "candidate_summary": "Omar is a career switcher: three years as a business analyst, a 16-week bootcamp, and freelance React work including SalonBook on Firebase. Frontend and stakeholder communication look solid; backend APIs, SQL schema design and team Git workflows are the clear gaps for this role. The interview should probe those gaps fairly and look for transferable strengths from his BA years.",
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "To start, tell me about your background and what pulled you from business analysis into building software yourself.",
+      "competency": "JavaScript/TypeScript",
+      "requirement_ids": [
+        "req_001_1"
+      ],
+      "rationale": "Warm-up for a career switcher; understanding the move frames how much hands-on JavaScript he has done beyond the bootcamp.",
+      "difficulty": "easy",
+      "type": "motivation"
+    },
+    {
+      "question_id": "q2",
+      "question": "You've built several client sites in React. How do you structure components and handle data fetching on a site like SalonBook?",
+      "competency": "React",
+      "requirement_ids": [
+        "req_001_2"
+      ],
+      "rationale": "React is his strongest claimed skill; asking about structure and data fetching checks depth beyond useState and styling.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q3",
+      "question": "SalonBook runs on Firebase. Have you built a REST API yourself, and how would you design one for its bookings?",
+      "competency": "Backend APIs",
+      "requirement_ids": [
+        "req_001_3"
+      ],
+      "rationale": "Profile lists only basic Node.js and a Firebase backend; this probes the backend gap while giving him a concrete system to reason about.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q4",
+      "question": "If you moved SalonBook's bookings into PostgreSQL, how would you design the tables and what queries would you need?",
+      "competency": "SQL databases",
+      "requirement_ids": [
+        "req_001_4"
+      ],
+      "rationale": "No SQL schema work appears in the profile; a familiar domain makes the gap fair to probe.",
+      "difficulty": "medium",
+      "type": "situational"
+    },
+    {
+      "question_id": "q5",
+      "question": "Tell me about a time you used branches, pull requests or code review while working with other developers.",
+      "competency": "Git and collaboration",
+      "requirement_ids": [
+        "req_001_5"
+      ],
+      "rationale": "He freelances solo, so team Git practice is unverified; the role works in a 6-person squad with code reviews.",
+      "difficulty": "easy",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q6",
+      "question": "Tell me about a time a client asked for a big change right before launch. How did you handle it?",
+      "competency": "Ownership",
+      "requirement_ids": [
+        "req_001_9"
+      ],
+      "rationale": "Freelance client work is where his ownership shows; checks judgement about scope and quality under pressure.",
+      "difficulty": "medium",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q7",
+      "question": "As a BA you sat between business and developers. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+      "competency": "Communication",
+      "requirement_ids": [
+        "req_001_10"
+      ],
+      "rationale": "His bio claims stakeholder strength; this verifies it in the setting FalconPay needs, explaining trade-offs to merchants.",
+      "difficulty": "easy",
+      "type": "situational"
+    }
+  ]
+}

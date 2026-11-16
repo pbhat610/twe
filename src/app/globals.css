@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   +twe design system
+   Tinted neutrals (faint green-grey cast), one jade accent reserved for
+   primary actions, selection, focus and progress. Status colours are muted.
+   ────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* White workspace: white surfaces on a barely-tinted page, one jade accent. */
+  --bg: #f6f7f6;
+  --surface: #ffffff;
+  --surface-2: #f1f3f1;
+  --border: #e3e6e2;
+  --border-strong: #c9cec8;
+  --text: #141815;
+  --muted: #4b534c; /* 8:1 on white */
+  --faint: #6b746c; /* 4.9:1 on white: captions only */
+
+  --brand: #0d6b58; /* jade: white text 6.4:1 */
+  --brand-hover: #0a5949;
+  --brand-ink: #ffffff;
+  --brand-soft: #e3f0eb;
+
+  --good: #1d6f45;
+  --warn: #8f5206;
+  --bad: #b3261e;
+
+  --shadow-sm: 0 1px 2px rgb(20 24 21 / 0.05);
+  --shadow-md: 0 1px 2px rgb(20 24 21 / 0.04), 0 8px 24px -12px rgb(20 24 21 / 0.14);
+  --shadow-lg: 0 2px 4px rgb(20 24 21 / 0.04), 0 24px 48px -16px rgb(20 24 21 / 0.22);
+  --highlight: inset 0 0 0 transparent;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+}
+
+/* The interview room is always dark graphite (camera-first, like a call),
+   with the same jade accent and no coloured glows. */
+.theme-call {
+  --bg: #0d100e;
+  --surface: #151916;
+  --surface-2: #1d221e;
+  --border: #2a302b;
+  --border-strong: #3b433d;
+  --text: #ecefec;
+  --muted: #b4bcb5;
+  --faint: #8d968e;
+  --brand: #4fb89c;
+  --brand-hover: #63c6ab;
+  --brand-ink: #07140f;
+  --brand-soft: #173029;
+  --good: #5cbf8a;
+  --warn: #d9a44a;
+  --bad: #ef7d73;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px -20px rgb(0 0 0 / 0.8);
+  --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.5), 0 28px 64px -28px rgb(0 0 0 / 0.9);
+  --highlight: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  background: var(--bg);
+  color: var(--text);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-out: var(--ease-out);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--brand-soft);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ── Type scale ───────────────────────────────────────────────────────── */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.t-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Surfaces ─────────────────────────────────────────────────────────── */
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--highlight), var(--shadow-sm);
+}
+.surface-raised {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--highlight), var(--shadow-lg);
+}
+/* Chrome laid over live video: solid enough to read, slight blur only. */
+.overlay {
+  background: rgb(13 16 14 / 0.8);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ecefec;
+}
+
+/* Hairline ruled list (replaces uniform card grids). */
+.ruled > * + * {
+  border-top: 1px solid var(--border);
+}
+
+/* ── Motion: short, eased-out, purposeful ─────────────────────────────── */
+@keyframes enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.enter { animation: enter 200ms var(--ease-out) both; }
+
+@keyframes listen {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 45%, transparent); }
+  100% { box-shadow: 0 0 0 6px transparent; }
+}
+.listening-dot { animation: listen 1.6s var(--ease-out) infinite; }
+
+@keyframes dots {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+.thinking-dot { animation: dots 1.2s ease-out infinite; }
+.thinking-dot:nth-child(2) { animation-delay: 0.15s; }
+.thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+.eq-bar { transform-origin: bottom; animation: eq 0.9s ease-out infinite; }
+.eq-bar:nth-child(2) { animation-delay: 0.15s; }
+.eq-bar:nth-child(3) { animation-delay: 0.3s; }
+.eq-bar:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes rec { 50% { opacity: 0.3; } }
+.rec-dot { animation: rec 1.6s ease-out infinite; }
+
+@keyframes blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+
+/* Right-hand slide-over panel. */
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+.slide-in { animation: slide-in 240ms var(--ease-out) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-in,
+  .enter, .listening-dot, .thinking-dot, .eq-bar, .rec-dot { animation: none; }
 }

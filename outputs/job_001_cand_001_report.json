@@ -1,0 +1,244 @@
+{
+  "interview_id": "int_cc8a944872864b92",
+  "job_id": "job_001",
+  "candidate_id": "cand_001",
+  "completed_at": "2026-11-15T17:57:40.256Z",
+  "competencies": [
+    {
+      "competency": "JavaScript/TypeScript",
+      "requirement_ids": [
+        "req_001_1"
+      ],
+      "score": 3,
+      "evidence": [
+        "Most of my experience is full stack JavaScript, from my internship and from CampusSwap, which I built and still run"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "React",
+      "requirement_ids": [
+        "req_001_2"
+      ],
+      "score": 4,
+      "evidence": [
+        "I split the context and memoised the list items"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Backend APIs",
+      "requirement_ids": [
+        "req_001_3"
+      ],
+      "score": 5,
+      "evidence": [
+        "I used cursor-based pagination because offset was getting slow on the bigger tables"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "SQL databases",
+      "requirement_ids": [
+        "req_001_4",
+        "req_001_6"
+      ],
+      "score": 5,
+      "evidence": [
+        "I used cursor-based pagination because offset was getting slow on the bigger tables",
+        "I made a mistake early by storing prices as floats and had rounding issues, so I switched to integers in fils"
+      ],
+      "notes": "Evidence from 2 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Git and collaboration",
+      "requirement_ids": [
+        "req_001_5"
+      ],
+      "score": null,
+      "evidence": [],
+      "notes": "Not evidenced in this interview; verify next round."
+    },
+    {
+      "competency": "Ownership",
+      "requirement_ids": [
+        "req_001_9",
+        "req_001_7"
+      ],
+      "score": 5,
+      "evidence": [
+        "I added connection pooling that night and posted an update on the student group"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    },
+    {
+      "competency": "Communication",
+      "requirement_ids": [
+        "req_001_10"
+      ],
+      "score": 4,
+      "evidence": [
+        "I learned to start with a real example before the theory"
+      ],
+      "notes": "Evidence from 1 answer(s) (offline heuristic)."
+    }
+  ],
+  "overall": {
+    "strengths": [
+      "Gave concrete, specific examples."
+    ],
+    "concerns": [],
+    "recommendation": "advance",
+    "confidence": "medium",
+    "summary": "Offline heuristic report: average answer score 4.3/5 across 6 scored answers. Switch LLM_PROVIDER to openai for a written assessment.",
+    "suggested_next_round_focus": [
+      "Git and collaboration"
+    ]
+  },
+  "flags": [],
+  "turns": [
+    {
+      "turn": 1,
+      "question_id": "q1",
+      "agent_message": "To start, tell me about your background and CampusSwap, the marketplace you built and still run.",
+      "candidate_answer": "Hi! I'm Layla, I just graduated in Computer Engineering from AUS. Most of my experience is full stack JavaScript, from my internship and from CampusSwap, which I built and still run.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "general",
+        "requirement_ids": [
+          "req_001_1"
+        ],
+        "key_quote": "Most of my experience is full stack JavaScript, from my internship and from CampusSwap, which I built and still run",
+        "score": 3,
+        "note": "Clear warm-up; real projects named but no detail yet."
+      },
+      "decision": "move_on",
+      "decision_reason": "Warm-up is clear; the next questions probe each skill in depth."
+    },
+    {
+      "turn": 2,
+      "question_id": "q2",
+      "agent_message": "Thanks, that's a helpful start. In CampusSwap, how did you handle state and data fetching in React, and was there a performance problem you had to fix?",
+      "candidate_answer": "In CampusSwap I used React Query for server state and kept UI state local with useState. Early on I had everything in a global context and the whole listing page re-rendered on every keystroke in search, so I split the context and memoised the list items. It went from noticeably laggy to smooth.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_2"
+        ],
+        "key_quote": "I split the context and memoised the list items",
+        "score": 4,
+        "note": "Concrete diagnosis and fix of a re-render problem; separates server and UI state."
+      },
+      "decision": "follow_up",
+      "decision_reason": "Strong answer worth one level deeper: how she found the cause and verified the fix."
+    },
+    {
+      "turn": 3,
+      "question_id": "q2",
+      "agent_message": "Thanks, that's interesting. How did you work out that the context was causing the re-renders, and how did you confirm the fix worked?",
+      "candidate_answer": "Could you rephrase that? I want to make sure I answer what you're asking.",
+      "analysis": {
+        "relevance": "no_answer",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": null,
+        "note": "Asked for clarification; no evidence given."
+      },
+      "decision": "move_on",
+      "decision_reason": "No answer to assess; moving on rather than repeating the question."
+    },
+    {
+      "turn": 4,
+      "question_id": "q3",
+      "agent_message": "No problem, let's try another one. At Gulf Logistics Tech you added four Express endpoints. Walk me through the trickiest one and how you designed the API.",
+      "candidate_answer": "During my internship I added four Express endpoints for shipment status. The tricky one was filtering by date range and status with pagination. I used cursor-based pagination because offset was getting slow on the bigger tables.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_3",
+          "req_001_4"
+        ],
+        "key_quote": "I used cursor-based pagination because offset was getting slow on the bigger tables",
+        "score": 5,
+        "note": "Specific API design trade-off with a performance reason; real production context."
+      },
+      "decision": "move_on",
+      "decision_reason": "Concrete and complete, including the trade-off; requirement is evidenced."
+    },
+    {
+      "turn": 5,
+      "question_id": "q4",
+      "agent_message": "Thanks, that's clear. How did you design the PostgreSQL schema for CampusSwap, and what would you change now that it handles real money?",
+      "candidate_answer": "For CampusSwap I designed tables for users, listings, offers and messages. I added an index on listings by course code and created_at because that's how people search. I made a mistake early by storing prices as floats and had rounding issues, so I switched to integers in fils.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_4",
+          "req_001_6"
+        ],
+        "key_quote": "I made a mistake early by storing prices as floats and had rounding issues, so I switched to integers in fils",
+        "score": 5,
+        "note": "Schema, an index justified by access patterns, and a money-handling lesson relevant to fintech."
+      },
+      "decision": "move_on",
+      "decision_reason": "Specific design decisions with reasons and a learned mistake; nothing left to probe here."
+    },
+    {
+      "turn": 6,
+      "question_id": "q5",
+      "agent_message": "Thanks, that's helpful. How did pull requests and code reviews work on your internship team, and what feedback do you remember getting?",
+      "candidate_answer": "Could you rephrase that? I want to make sure I answer what you're asking.",
+      "analysis": {
+        "relevance": "no_answer",
+        "depth": "vague",
+        "requirement_ids": [],
+        "key_quote": null,
+        "score": null,
+        "note": "Asked for clarification; no evidence given."
+      },
+      "decision": "move_on",
+      "decision_reason": "No answer to assess; moving on rather than repeating the question."
+    },
+    {
+      "turn": 7,
+      "question_id": "q6",
+      "agent_message": "No problem, let's try another one. Tell me about a time CampusSwap broke in production. What did you do in the moment, and what did you change afterwards?",
+      "candidate_answer": "When CampusSwap went down during exam week because I hit the free database connection limit, I added connection pooling that night and posted an update on the student group. Since then I set up basic uptime alerts.",
+      "analysis": {
+        "relevance": "on_topic",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_9",
+          "req_001_7"
+        ],
+        "key_quote": "I added connection pooling that night and posted an update on the student group",
+        "score": 5,
+        "note": "Owned an outage end to end: fixed the cause, communicated, added monitoring."
+      },
+      "decision": "move_on",
+      "decision_reason": "Clear ownership story with action, communication and prevention."
+    },
+    {
+      "turn": 8,
+      "question_id": "q7",
+      "agent_message": "Thanks, that's a good example. As a teaching assistant you explained code to beginners. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+      "candidate_answer": "As a TA I had to explain recursion to first year students who'd never coded. I learned to start with a real example before the theory.",
+      "analysis": {
+        "relevance": "partial",
+        "depth": "specific_example",
+        "requirement_ids": [
+          "req_001_10"
+        ],
+        "key_quote": "I learned to start with a real example before the theory",
+        "score": 4,
+        "note": "Good explanation approach from teaching; not yet shown with business stakeholders."
+      },
+      "decision": "move_on",
+      "decision_reason": "Transferable evidence is concrete; enough for this competency."
+    }
+  ]
+}

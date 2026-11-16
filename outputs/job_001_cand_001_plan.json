@@ -1,0 +1,88 @@
+{
+  "interview_id": "int_cc8a944872864b92",
+  "job_id": "job_001",
+  "candidate_id": "cand_001",
+  "created_at": "2026-11-15T17:57:36.032Z",
+  "candidate_summary": "Layla is a strong match: a full stack JavaScript graduate who built and still runs CampusSwap (Next.js, Node, PostgreSQL, Stripe test mode) and added REST endpoints and Jest tests during her internship. Her claims are specific, so the interview should go deeper than confirming skills: performance trade-offs, API design, schema decisions and how she handles production issues. Git collaboration and cloud deployment are less evidenced and worth probing.",
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "To start, tell me about your background and CampusSwap, the marketplace you built and still run.",
+      "competency": "JavaScript/TypeScript",
+      "requirement_ids": [
+        "req_001_1"
+      ],
+      "rationale": "Warm-up anchored on her own project; CampusSwap is the clearest evidence of building real features beyond tutorials.",
+      "difficulty": "easy",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q2",
+      "question": "In CampusSwap, how did you handle state and data fetching in React, and was there a performance problem you had to fix?",
+      "competency": "React",
+      "requirement_ids": [
+        "req_001_2"
+      ],
+      "rationale": "She lists React and Next.js; asking about a performance fix tests depth of state management rather than familiarity.",
+      "difficulty": "medium",
+      "type": "technical"
+    },
+    {
+      "question_id": "q3",
+      "question": "At Gulf Logistics Tech you added four Express endpoints. Walk me through the trickiest one and how you designed the API.",
+      "competency": "Backend APIs",
+      "requirement_ids": [
+        "req_001_3"
+      ],
+      "rationale": "Her internship summary claims four REST endpoints; this verifies API design decisions such as filtering and pagination.",
+      "difficulty": "hard",
+      "type": "technical"
+    },
+    {
+      "question_id": "q4",
+      "question": "How did you design the PostgreSQL schema for CampusSwap, and what would you change now that it handles real money?",
+      "competency": "SQL databases",
+      "requirement_ids": [
+        "req_001_4",
+        "req_001_6"
+      ],
+      "rationale": "CampusSwap uses PostgreSQL and Stripe; asking about schema choices under payments probes both the must-have and her fintech exposure.",
+      "difficulty": "hard",
+      "type": "technical"
+    },
+    {
+      "question_id": "q5",
+      "question": "How did pull requests and code reviews work on your internship team, and what feedback do you remember getting?",
+      "competency": "Git and collaboration",
+      "requirement_ids": [
+        "req_001_5"
+      ],
+      "rationale": "Git is listed as a skill but the profile shows mostly solo work on CampusSwap; this checks team collaboration habits.",
+      "difficulty": "medium",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q6",
+      "question": "Tell me about a time CampusSwap broke in production. What did you do in the moment, and what did you change afterwards?",
+      "competency": "Ownership",
+      "requirement_ids": [
+        "req_001_9",
+        "req_001_7"
+      ],
+      "rationale": "She still runs a live product with 400 users; an incident story shows ownership and how she approaches deployment and monitoring.",
+      "difficulty": "medium",
+      "type": "behavioral"
+    },
+    {
+      "question_id": "q7",
+      "question": "As a teaching assistant you explained code to beginners. How would you explain a technical trade-off to a merchant who isn't an engineer?",
+      "competency": "Communication",
+      "requirement_ids": [
+        "req_001_10"
+      ],
+      "rationale": "Her TA role suggests strong explanation skills; this tests whether they transfer to non-technical stakeholders like FalconPay's merchants.",
+      "difficulty": "medium",
+      "type": "situational"
+    }
+  ]
+}

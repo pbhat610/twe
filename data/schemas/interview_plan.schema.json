@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterviewPlan",
+  "type": "object",
+  "required": ["interview_id", "job_id", "candidate_id", "created_at", "questions"],
+  "properties": {
+    "interview_id": { "type": "string" },
+    "job_id": { "type": "string" },
+    "candidate_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "candidate_summary": {
+      "type": "string",
+      "description": "2-3 sentences: how the profile lines up against the job, key strengths and gaps to probe"
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["question_id", "question", "competency", "requirement_ids", "rationale", "difficulty"],
+        "properties": {
+          "question_id": { "type": "string", "examples": ["q1"] },
+          "question": { "type": "string" },
+          "competency": { "type": "string", "examples": ["Backend APIs"] },
+          "requirement_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "IDs from the job's requirements, e.g. req_001_3"
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Why this question for THIS candidate (verify a claim, probe a gap, etc.)"
+          },
+          "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+          "type": { "type": "string", "enum": ["technical", "behavioral", "situational", "motivation"] }
+        }
+      }
+    }
+  }
+}
