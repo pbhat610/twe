@@ -1,7 +1,7 @@
 "use client";
 
-import { Keyboard, Mic, PhoneOff, RotateCcw, Send, SkipForward, Sparkles, Square } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { Check, Keyboard, Mic, PhoneOff, RotateCcw, Send, SkipForward, Sparkles } from "lucide-react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/components/ui/primitives";
 import type { Phase } from "@/hooks/useInterviewFlow";
 import { useRecorder, type RecorderSink } from "@/hooks/useRecorder";
@@ -68,21 +68,40 @@ export function CallControls({
   onSkip: () => void;
   onEnd: () => void;
 }) {
-  const rec = useRecorder(recorderSink);
+  // Hands-free: the mic opens when it's the candidate's turn and the answer is
+  // sent when they pause. "Done answering" sends early; typing turns this off.
+  const finishing = useRef(false);
+  const finishRef = useRef<() => void>(() => undefined);
+  const rec = useRecorder(recorderSink, { onEnd: () => finishRef.current() });
   const canVoice = voiceAvailable && rec.supported;
   const [typing, setTyping] = useState(!canVoice);
   const [draft, setDraft] = useState("");
   const ready = phase === "awaiting";
   const showComposer = typing || !canVoice;
+  const handsFree = canVoice && !typing;
+  const { recording, start, stop } = rec;
 
-  const toggleRecording = async () => {
-    if (rec.recording) {
-      const blob = await rec.stop();
+  const finish = useCallback(async () => {
+    if (finishing.current) return;
+    finishing.current = true;
+    try {
+      const blob = await stop();
       if (blob) onVoice(blob);
-    } else {
-      await rec.start();
+    } finally {
+      finishing.current = false;
     }
-  };
+  }, [stop, onVoice]);
+  useEffect(() => {
+    finishRef.current = () => void finish();
+  });
+
+  useEffect(() => {
+    if (finishing.current) return;
+    // Candidate's turn → start listening automatically.
+    if (handsFree && ready && !recording) void start();
+    // Turn over without an answer (replay, end, switched to typing) → drop the audio.
+    if ((!ready || !handsFree) && recording) void stop();
+  }, [handsFree, ready, recording, start, stop]);
 
   const send = () => {
     if (!draft.trim() || !ready) return;
@@ -122,19 +141,18 @@ export function CallControls({
       )}
 
       <div className="flex items-center gap-1 rounded-md border border-border bg-surface p-1.5 shadow-md">
-        {canVoice && (
+        {handsFree && (
           <button
-            onClick={toggleRecording}
-            disabled={!ready && !rec.recording}
-            aria-label={rec.recording ? "Stop and send answer" : "Answer with your voice"}
+            onClick={() => void finish()}
+            disabled={!rec.recording || !rec.heard}
+            aria-label={rec.recording ? "Done answering — send now" : "Microphone"}
             className={cn(
               "relative mr-1 flex h-10 min-w-[9.5rem] items-center justify-center gap-2 rounded-sm px-4 text-[14px] font-medium transition-colors duration-150 ease-out disabled:cursor-not-allowed disabled:opacity-40",
-              rec.recording ? "bg-bad text-[#140605]" : "bg-brand text-brand-ink hover:bg-brand-hover",
+              rec.recording ? "bg-brand text-brand-ink hover:bg-brand-hover disabled:opacity-100" : "bg-surface-2 text-muted",
             )}
           >
             {rec.recording ? (
               <>
-                <Square className="h-4 w-4 fill-current" />
                 <span className="flex h-4 items-end gap-0.5" aria-hidden>
                   {[0, 1, 2, 3].map((i) => (
                     <span
@@ -144,17 +162,23 @@ export function CallControls({
                     />
                   ))}
                 </span>
-                Send
+                {rec.heard ? (
+                  <>
+                    <Check className="h-4 w-4" /> Done answering
+                  </>
+                ) : (
+                  "Listening…"
+                )}
               </>
             ) : (
               <>
-                <Mic className="h-4 w-4" /> {ready ? "Answer" : "Mic"}
+                <Mic className="h-4 w-4" /> {ready ? "Starting mic…" : "Mic off"}
               </>
             )}
           </button>
         )}
         {canVoice && (
-          <RoundButton label={typing ? "Hide keyboard" : "Type instead"} onClick={() => setTyping((t) => !t)} active={typing} disabled={rec.recording}>
+          <RoundButton label={typing ? "Answer by voice" : "Type instead"} onClick={() => setTyping((t) => !t)} active={typing}>
             <Keyboard className="h-[18px] w-[18px]" />
           </RoundButton>
         )}
@@ -178,6 +202,15 @@ export function CallControls({
         </RoundButton>
       </div>
 
+      {handsFree && rec.recording && (
+        <p className="text-[13px] text-faint" aria-live="polite">
+          {rec.pausing
+            ? "Sending when you stay quiet… keep talking to continue."
+            : rec.heard
+              ? "Your answer sends automatically when you pause."
+              : "Just speak. No need to press anything."}
+        </p>
+      )}
       {rec.error && <p className="text-[13px] text-warn">{rec.error}</p>}
     </div>
   );

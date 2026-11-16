@@ -99,7 +99,7 @@ export function PreJoin({
           <h2 className="t-h1 mt-2">Ready, {firstName}?</h2>
           <p className="mt-2 text-[14px] text-muted">
             {totalQuestions} questions for the {jobTitle} role, one at a time
-            {durationMinutes ? `, in about ${durationMinutes} minutes (a timer shows the time left)` : ""}. Aria may follow up on your answers.
+            {durationMinutes ? `, in about ${durationMinutes} minutes (a timer shows the time left)` : ""}. Aria may follow up on your answers. Just talk when it&apos;s your turn: there&apos;s nothing to press, and your answer is sent when you pause.
           </p>
         </div>
 

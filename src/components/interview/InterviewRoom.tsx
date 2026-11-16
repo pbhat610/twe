@@ -17,7 +17,7 @@ import { CandidateTranscript } from "./CandidateTranscript";
 
 const STATUS: Partial<Record<Phase, { label: string; dot: string }>> = {
   speaking: { label: "Aria is speaking", dot: "bg-brand" },
-  awaiting: { label: "Your turn. Take your time.", dot: "bg-good listening-dot" },
+  awaiting: { label: "Your turn. Just speak.", dot: "bg-good listening-dot" },
   transcribing: { label: "Transcribing your answer", dot: "bg-faint" },
   thinking: { label: "Aria is thinking", dot: "bg-faint" },
   closing: { label: "Wrapping up", dot: "bg-brand" },
